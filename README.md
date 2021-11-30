@@ -2,6 +2,7 @@
 
 An alternative frontend for WLED built with Vue and Tailwind CSS.
 
+**Note**: This is under early active development and may be subject to breaking changes until it reaches a stable version **1.0.0**.
 
 |||
 |-|-|
