@@ -1,0 +1,296 @@
+<script setup lang="ts">
+	import { useWLEDClient } from "vue-wled"
+	import { computed, ref, watch } from "vue"
+	import throttle from 'lodash/throttle'
+	import { Listbox, ListboxButton, ListboxOptions, ListboxOption, Popover, PopoverButton, PopoverPanel } from "@headlessui/vue"
+	import SvgIcon from "../components/SvgIcon.vue"
+	import MastheadNavButton from "./MastheadNavButton.vue"
+	import AbstractButton from "./AbstractButton.vue"
+	import Toggle from "./Toggle.vue"
+	import ProgressCircle from "./ProgressCircle.vue"
+
+	const { state, info, effects, palettes, live, nightlight, toggle, updateState, setEffect, setPalette, setEffectSpeed, setEffectIntensity, toggleLEDStream, enableUDPSync, disableUDPSync } = useWLEDClient()
+
+	//
+	// Palette selector
+	const sorted_palettes = computed(() => [...palettes].sort((a, b) => {
+		return a.localeCompare(b, undefined, {
+			numeric: true,
+			sensitivity: 'base'
+		})
+	}))
+	const _selected_palette = ref(palettes[state.segments[state.mainSegmentId!]?.paletteId || 0])
+	watch<string>(() => palettes[state.segments[state.mainSegmentId!]?.paletteId || 0], (new_value) => _selected_palette.value = new_value)
+	const selected_palette = computed<string>({
+		get() {
+			return _selected_palette.value
+		},
+		set(new_value) {
+			let paletteId = palettes.findIndex((effect) => effect === new_value)
+			if (paletteId != -1) {
+				_selected_palette.value = new_value
+				setPalette(paletteId)
+			}
+		}
+	})
+
+	//
+	// Effect selector
+	const effects_search_query = ref('')
+	const sorted_effects = computed(() => [...effects].sort((a, b) => {
+		return a.localeCompare(b, undefined, {
+			numeric: true,
+			sensitivity: 'base'
+		})
+	}))
+	const _selected_effect = ref(effects[state.segments[state.mainSegmentId!]?.effectId || 0])
+	watch<string>(() => effects[state.segments[state.mainSegmentId!]?.effectId || 0], (new_value) => _selected_effect.value = new_value)
+	const selected_effect = computed<string>({
+		get() {
+			return _selected_effect.value
+		},
+		set(new_value) {
+			let effectId = effects.findIndex((effect) => effect === new_value)
+			if (effectId != -1) {
+				_selected_effect.value = new_value
+				setEffect(effectId)
+			}
+		}
+	})
+
+	//
+	// Effect Sliders
+	let isDraggingEffectSpeed = false
+	const _effect_speed = ref<number>(state.segments[state.mainSegmentId!]?.effectSpeed||128)
+	watch<number|undefined>(() => state.segments[state.mainSegmentId!]?.effectSpeed, (new_value) => { if (!isDraggingEffectSpeed) _effect_speed.value = new_value || 0 }, { immediate: true, flush: 'sync' })
+
+	const _setEffectSpeed = throttle((effect_speed) => setEffectSpeed(effect_speed), 100)
+	const effect_speed = computed({
+		get() {
+			return _effect_speed.value
+		},
+		set: (effect_speed:number) => {
+			_effect_speed.value = effect_speed
+			_setEffectSpeed(effect_speed)
+		}
+	})
+
+	const handleEffectSpeedInput = ({target}) => effect_speed.value = parseInt(target.value)
+	const handleEffectSpeedPointerDown = ({}) => isDraggingEffectSpeed = true
+	const handleEffectSpeedPointerUp = ({}) => isDraggingEffectSpeed = false
+
+	let isDraggingEffectIntensity = false
+	const _effect_intensity = ref<number>(state.segments[state.mainSegmentId!]?.effectIntensity||128)
+	watch<number|undefined>(() => state.segments[state.mainSegmentId!]?.effectIntensity, (new_value) => { if (!isDraggingEffectIntensity) _effect_intensity.value = new_value || 0 }, { immediate: true, flush: 'sync' })
+
+	const _setEffectIntensity = throttle((effect_intensity) => setEffectIntensity(effect_intensity), 100)
+	const effect_intensity = computed({
+		get() {
+			return _effect_intensity.value
+		},
+		set: (effect_intensity:number) => {
+			_effect_intensity.value = effect_intensity
+			_setEffectIntensity(effect_intensity)
+		}
+	})
+
+	const handleEffectIntensityInput = ({target}) => effect_intensity.value = parseInt(target.value)
+	const handleEffectIntensityPointerDown = ({}) => isDraggingEffectIntensity = true
+	const handleEffectIntensityPointerUp = ({}) => isDraggingEffectIntensity = false
+
+	//
+	// Brightness Slider
+	let isDraggingBrightness = false
+	const _brightness = ref<number>(state.brightness||128)
+	watch<number|undefined>(() => state.brightness, (new_value) => { if (!isDraggingBrightness) _brightness.value = new_value || 0 }, { immediate: true, flush: 'sync' })
+
+	const setBrightness = throttle((brightness) => updateState({ brightness, temporaryTransition: 1 }), 100)
+	const brightness = computed({
+		get() {
+			return _brightness.value
+		},
+		set: (brightness:number) => {
+			_brightness.value = brightness
+			setBrightness(brightness)
+		}
+	})
+
+	const handleBrightnessInput = ({target}) => brightness.value = parseInt(target.value)
+	const handleBrightnessPointerDown = ({}) => isDraggingBrightness = true
+	const handleBrightnessPointerUp = ({}) => setTimeout(() => isDraggingBrightness = false, 200)
+
+	//
+	// Sync Button
+	const isSyncActive = computed(() => info.syncToggleReceive ? state.udpSync.send && state.udpSync.receive : state.udpSync.send)
+	const handleSyncClick = () => {
+		console.log(!info.syncToggleReceive, state.udpSync.send)
+		if (info.syncToggleReceive && state.udpSync.send && state.udpSync.receive) return disableUDPSync()
+		if (!info.syncToggleReceive && state.udpSync.send) return disableUDPSync()
+		return enableUDPSync()
+	}
+
+	//
+	// Nightlight
+	const remaining = computed(() => Math.min(100, Math.max(0, ((state.nightlight.remaining || 0) / ((state.nightlight.duration || 100) * 60))*100 )))
+</script>
+
+<template>
+	<header class="md:bg-neutral-950 flex flex-col md:flex-row">
+		<!-- Device Global Functions -->
+		<div class="flex-1 flex bg-neutral-850">
+			<!-- <button class="p-1/2 bg-neutral-800 hover:bg-neutral-750 active:bg-neutral-850" @click="toggle()"><SvgIcon name="power" class="h-2 fill-neutral-0" /></button> -->
+			<MastheadNavButton icon="power" label="Power" @click="toggle()" :active="state.on" />
+			<MastheadNavButton @click="nightlight.toggle()" :active="state.nightlight.on" v-slot="{ active }">
+				<SvgIcon name="nightlight" class="h-1-1/4 fill-current" v-if="!active" />
+				<ProgressCircle :progress="remaining" class="h-1-1/4 stroke-current" v-else />
+				<div class="leading-2/3 w-1-3/4 flex justify-center" :class="{ 'opacity-60': !active }">Timer</div>
+			</MastheadNavButton>
+			<!-- <MastheadNavButton icon="sync" label="Sync" @click="handleSyncClick" :active="isSyncActive" />
+			<MastheadNavButton icon="peek" label="Peek" @click="toggleLEDStream()" :active="live.leds" /> -->
+			<MastheadNavButton icon="white-balance" label="White" to="/" />
+			<MastheadNavButton icon="rgb-wheel" label="Color" to="/color" />
+			<MastheadNavButton icon="heart" label="Presets" to="/presets" />
+		</div>
+
+		<!-- Brightness -->
+		<div class="flex-1 p-3/4 flex flex-col md:max-w-12 md:min-w-12 bg-neutral-900 bg-gradient-to-b from-neutral-900 to-neutral-875">
+			<div class="md:flex-1"></div>
+			<div class="flex gap-1/2">
+				<div>
+					<SvgIcon name="brightness" class="w-1-3/4 h-1-3/4 fill-white" :style="{ 'opacity':  Math.max(0.1, brightness/255) }" />
+				</div>
+				<div class="flex-1 flex flex-col justify-end gap-1/4">
+					<div class="justify-self-end flex text-xs leading-1/2">
+						<div class="text-neutral-200">Brightness</div>
+						<div class="flex-1"></div>
+						<div class="font-bold">{{ brightness }}/255</div>
+					</div>
+					<input class="h-3/4" type="range" min="0" max="255" :value="brightness" @input="handleBrightnessInput" @pointerdown="handleBrightnessPointerDown" @pointerup="handleBrightnessPointerUp" />
+				</div>
+			</div>
+		</div>
+
+		<!-- Bottom -->
+		<div class="flex relative divide-x divide-neutral-875">
+
+			<!-- Effects -->
+			<Listbox v-model="selected_effect" v-slot="{ open }">
+				<ListboxButton class="flex-1 md:w-8 text-left px-1 flex items-center" :class="{ 'bg-neutral-875 bg-gradient-to-br from-neutral-900 to-neutral-925 hover:from-neutral-850 hover:to-neutral-875': !open, 'bg-neutral-200 text-black': open }">
+					<div class="flex-1 flex flex-col overflow-hidden">
+						<div class="text-xs leading-1/2" :class="{ 'text-neutral-400': !open, 'text-neutral-800': open }">Effect</div>
+						<div class="font-medium leading-1 truncate">{{ selected_effect }}</div>
+					</div>
+					<SvgIcon name="selector" class="h-1 fill-neutral-100" />
+				</ListboxButton>
+				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950">
+					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Select Effect</div>
+					<div class="overflow-auto flex-1">
+						<ListboxOption
+							v-for="effect in sorted_effects"
+							:key="effect"
+							:value="effect"
+							class="p-1/2 bg-neutral-900 hover:bg-neutral-800 cursor-pointer"
+						>
+							{{ effect }}
+						</ListboxOption>
+					</div>
+				</ListboxOptions>
+			</Listbox>
+
+			<!-- Effects Sliders -->
+			<Popover v-slot="{ open }">
+				<PopoverPanel class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full flex flex-col shadow-md">
+					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Effect Settings</div>
+					<div class="flex-1 p-3/4 flex md:max-w-18 md:min-w-12 bg-neutral-875 gap-1/2">
+						<div class="grid grid-stack">
+							<SvgIcon name="speed-dial" class="mt-1/8 w-1-3/4 h-1-3/4 fill-white" :style="{ 'transform':  `rotate(${ ((effect_speed/255) * 180) }deg)` }" />
+							<SvgIcon name="speed" class="w-1-3/4 h-1-3/4 fill-white" />
+						</div>
+						<div class="flex-1 flex flex-col justify-end gap-1/4">
+							<div class="justify-self-end flex text-xs leading-1/2">
+								<div class="text-neutral-200">Effect Speed</div>
+								<div class="flex-1"></div>
+								<div class="font-bold">{{ effect_speed }}/255</div>
+							</div>
+							<input class="h-3/4" type="range" min="0" max="255" :value="effect_speed" @input="handleEffectSpeedInput" @pointerdown="handleEffectSpeedPointerDown" @pointerup="handleEffectSpeedPointerUp" />
+						</div>
+					</div>
+					<div class="flex-1 p-3/4 flex md:max-w-18 md:min-w-12 bg-neutral-875 gap-1/2">
+						<div>
+							<SvgIcon name="intensity" class="w-1-3/4 h-1-3/4 fill-white" :style="{ 'opacity':  Math.max(0.1, effect_intensity/255) }" />
+						</div>
+						<div class="flex-1 flex flex-col justify-end gap-1/4">
+							<div class="justify-self-end flex text-xs leading-1/2">
+								<div class="text-neutral-200">Effect Intensity</div>
+								<div class="flex-1"></div>
+								<div class="font-bold">{{ effect_intensity }}/255</div>
+							</div>
+							<input class="h-3/4" type="range" min="0" max="255" :value="effect_intensity" @input="handleEffectIntensityInput" @pointerdown="handleEffectIntensityPointerDown" @pointerup="handleEffectIntensityPointerUp" />
+						</div>
+					</div>
+				</PopoverPanel>
+				<PopoverButton class="h-full p-3/4 flex items-center group" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-neutral-950 hover:bg-gradient-radial hover:from-primary-500 hover:to-primary-700': !open }">
+					<SvgIcon name="sliders" class="w-1-1/4 h-1-1/4 fill-white z-10" />
+				</PopoverButton>
+			</Popover>
+
+			<!-- Color Palette -->
+			<Listbox v-model="selected_palette" v-slot="{ open }">
+				<ListboxButton class="h-full p-3/4 flex items-center group" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-neutral-950 hover:bg-gradient-radial hover:from-primary-500 hover:to-primary-700': !open }">
+					<SvgIcon name="palette" class="w-1-1/4 h-1-1/4 fill-white z-10" />
+				</ListboxButton>
+				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950">
+					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Color Palette</div>
+					<div class="overflow-auto flex-1">
+						<ListboxOption
+							v-for="palette in sorted_palettes"
+							:key="palette"
+							:value="palette"
+							class="p-1/2 bg-neutral-900 hover:bg-neutral-800 cursor-pointer"
+						>
+							{{ palette }}
+						</ListboxOption>
+					</div>
+				</ListboxOptions>
+			</Listbox>
+
+			<!-- Menu -->
+			<Popover v-slot="{ open }">
+				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full max-w-14 flex flex-col shadow-md">
+					<div class="rounded-tl-1/2 md:rounded-tl-none px-3/4 py-1/2 bg-neutral-825 md:bg-gradient-to-tr from-neutral-825 via-neutral-825 to-primary-700/70 flex items-center gap-1/4">
+						<img src="../assets/images/aircookie-logo.png" title="AirCookie" class="h-1-1/2"/>
+						<div class="font-bold text-lg leading-1">WLED</div>
+					</div>
+					<router-link @click="close" class="py-1/2 px-1 hover:bg-neutral-850 bg-neutral-875" to="/segments" v-slot="{}">
+						Segments
+					</router-link>
+					<router-link @click="close" class="py-1/2 px-1 hover:bg-neutral-850 bg-neutral-875" to="/info">
+						Device Information
+					</router-link>
+					<router-link @click="close" class="py-1/2 px-1 hover:bg-neutral-850 bg-neutral-875" to="/settings">
+						Settings
+					</router-link>
+					<button @click="handleSyncClick" class="border-t border-neutral-925 text-left py-1/2 px-1 flex items-center hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+						<div class="flex-1 flex flex-col">
+							<div>Sync</div>
+							<div class="text-neutral-600 text-xs">Synchronize with other devices</div>
+						</div>
+						<Toggle :modelValue="isSyncActive ? true:undefined" />
+					</button>
+					<button @click="toggleLEDStream" class="text-left py-1/2 px-1 flex items-center hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+						<div class="flex-1 flex flex-col">
+							<div>Peek</div>
+							<div class="text-neutral-600 text-xs">Show a preview of the device</div>
+						</div>
+						<Toggle :modelValue="live.leds ? true:undefined" />
+					</button>
+					<div class="md:rounded-bl-1/2 h-1/2 bg-neutral-825 md:bg-none bg-gradient-to-br from-neutral-825 via-neutral-825 to-primary-700/70"></div>
+				</PopoverPanel>
+				<PopoverButton class="h-full p-1/2 flex items-center group" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-neutral-950 hover:bg-gradient-radial hover:from-primary-500 hover:to-primary-700': !open }">
+					<img src="../assets/images/cheerful-akemi.png" title="Menu" class="w-1-3/4 h-1-3/4 -mr-3/4 from-primary-0/80 via-primary-300/70 to-primary-500/0" :class="{ 'bg-gradient-radial-side': open, 'opacity-40 group-hover:opacity-100 group-hover:bg-gradient-radial-side mix-blend-luminosity group-hover:mix-blend-normal': !open }" />
+					<SvgIcon name="menu" class="w-1-3/4 h-1-3/4 fill-white z-10" />
+				</PopoverButton>
+			</Popover>
+		</div>
+	</header>
+</template>

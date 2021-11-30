@@ -1,0 +1,2 @@
+
+export const glsl = (strings:TemplateStringsArray, ...args:any[]) => strings.map((string, i) => `${string}${args[i] || ''}`).join('') // This is a pass-through template function so glsl`` templates can have syntax highlighting when writing shaders in typescript
