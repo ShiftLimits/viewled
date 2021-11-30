@@ -2,6 +2,9 @@
 
 An alternative frontend for WLED built with Vue and Tailwind CSS.
 
+<img src="docs/images/preview.png?raw=true" width="200">
+<img src="docs/images/preview2.png?raw=true" width="200">
+
 ## What is this?
 
 [WLED](https://github.com/Aircoookie/WLED) is an excellent controller software for your LED projects. VieWLED is an experimental alternative frontend built with Vue and Tailwind CSS.
