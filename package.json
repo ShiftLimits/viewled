@@ -7,6 +7,9 @@
     "build": "vite build",
     "dev": "vite"
   },
+  "gitHooks": {
+    "commit-msg": "node scripts/verifyCommit.js"
+  },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.1",
     "@types/express": "^4.17.13",
@@ -25,7 +28,8 @@
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2",
     "vite": "^2.6.14",
-    "vite-plugin-svg-icons": "^1.0.5"
+    "vite-plugin-svg-icons": "^1.0.5",
+    "yorkie": "^2.0.0"
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.2",
