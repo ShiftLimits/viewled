@@ -11,7 +11,8 @@
     "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
     "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "resolveJsonModule": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
