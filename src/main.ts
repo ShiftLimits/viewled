@@ -26,8 +26,6 @@ export function createApp(options:AppOptions = {}) {
 	const wled_client = new WLEDClient(import.meta.env.WLED_DEVICE_HOST)
 	app.use(wledClientPlugin(wled_client))
 
-	window.wled = wled_client
-
 	// App Services
 
 	// Components
