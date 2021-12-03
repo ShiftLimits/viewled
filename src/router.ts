@@ -16,13 +16,13 @@ export function createAppRouter(options:AppRouterOptions = {}) {
 		{ path: '/color', component: () => import('./pages/color.vue') },
 		{ path: '/info', component: () => import('./pages/info.vue') },
 		{ path: '/settings', component: () => import('./pages/settings.vue'), children: [
-			{ path: '', component: () => import('./pages/settings/index.vue') },
 			{ path: 'schedule', component: () => import('./pages/settings/time.vue') },
 			{ path: 'wifi', component: () => import('./pages/settings/wifi.vue') },
 			{ path: 'ui', component: () => import('./pages/settings/ui.vue') },
 			{ path: 'hardware', component: () => import('./pages/settings/hardware.vue') },
 			{ path: 'security', component: () => import('./pages/settings/security.vue') },
 			{ path: 'update', component: () => import('./pages/settings/update.vue') },
+			{ path: ':pathMatch(.*)*', component: () => import('./pages/settings/index.vue') },
 		] },
 		{ path: '/:pathMatch(.*)*', component: () => import('./pages/404.vue') }
 	]
