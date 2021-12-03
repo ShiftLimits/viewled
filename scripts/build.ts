@@ -92,7 +92,7 @@ ${ toHexString(gzip_buffer) }
 		// Add a new line to the WLED router code for this route
 		wled_ui_imports += `
 #include "ui/${ header_file }"`
-		viewled_server_routes.push(buildWLEDServerRoute(route, `PAGE_${name}`, lookup(ext)||'text/plain'))
+		if (!['404'].includes(name)) viewled_server_routes.push(buildWLEDServerRoute(route, `PAGE_${name}`, lookup(ext)||'text/plain'))
 
 		// Add to totals
 		total_size += html.length
