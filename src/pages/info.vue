@@ -9,7 +9,7 @@ const { info, reboot } = useWLEDClient()
 	<div class="p-1">
 		<div class="flex flex-col gap-1">
 			<pre>{{ info }}</pre>
-			<button @click="reboot" class="p-1/2 rounded-1/2 bg-neutral-700 hover:bg-neutral-800">Reboot</button>
+			<button @click="reboot" class="p-1/2 rounded-1/2 bg-neutral-700 mouse:hover:bg-neutral-800">Reboot</button>
 		</div>
 	</div>
 </template>
