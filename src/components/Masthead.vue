@@ -137,16 +137,13 @@
 <template>
 	<header class="md:bg-neutral-950 flex flex-col md:flex-row">
 		<!-- Device Global Functions -->
-		<div class="flex-1 flex bg-neutral-850">
-			<!-- <button class="p-1/2 bg-neutral-800 hover:bg-neutral-750 active:bg-neutral-850" @click="toggle()"><SvgIcon name="power" class="h-2 fill-neutral-0" /></button> -->
+		<div class="flex-1 flex bg-neutral-850 divide-x divide-neutral-850">
 			<MastheadNavButton icon="power" label="Power" @click="toggle()" :active="state.on" />
 			<MastheadNavButton @click="nightlight.toggle()" :active="state.nightlight.on" v-slot="{ active }">
 				<SvgIcon name="nightlight" class="h-1-1/4 fill-current" v-if="!active" />
 				<ProgressCircle :progress="remaining" class="h-1-1/4 stroke-current" v-else />
 				<div class="leading-2/3 w-1-3/4 flex justify-center" :class="{ 'opacity-60': !active }">Timer</div>
 			</MastheadNavButton>
-			<!-- <MastheadNavButton icon="sync" label="Sync" @click="handleSyncClick" :active="isSyncActive" />
-			<MastheadNavButton icon="peek" label="Peek" @click="toggleLEDStream()" :active="live.leds" /> -->
 			<MastheadNavButton icon="white-balance" label="White" to="/" />
 			<MastheadNavButton icon="rgb-wheel" label="Color" to="/color" />
 			<MastheadNavButton icon="heart" label="Presets" to="/presets" />
