@@ -23,7 +23,11 @@ export function createApp(options:AppOptions = {}) {
 	const router = createAppRouter({ isServer })
 	app.use(router)
 
-	const wled_client = new WLEDClient(import.meta.env.WLED_DEVICE_HOST)
+	let host = isServer ? '' : window.location.hostname
+	const wled_client = new WLEDClient({
+		host: import.meta.env.PROD ? host : import.meta.env.WLED_DEVICE_HOST,
+		immediate: !isServer
+	})
 	app.use(wledClientPlugin(wled_client))
 
 	// App Services
