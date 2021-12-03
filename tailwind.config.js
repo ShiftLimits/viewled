@@ -57,60 +57,61 @@ module.exports = {
             typography: (theme) => ({
                 DEFAULT: {
                     css: {
-                        color: theme('colors.neutral.800'),
+                        color: theme('colors.neutral.200'),
                         marginTop: "var(--twgl-base)",
                         marginBottom: "var(--twgl-base)",
                         '[class~="lead"]': {
-                            color: theme('colors.neutral.800'),
+                            color: theme('colors.neutral.200'),
                         },
                         a: {
-                            color: theme('colors.neutral.800')
+                            color: theme('colors.neutral.200')
                         },
                         strong: {
-                            color: theme('colors.neutral.800')
+                            color: theme('colors.neutral.200')
                         },
                         'ol > li::before': {
                             color: theme('colors.neutral.500')
                         },
                         'ul > li::before': {
-                            backgroundColor: theme('colors.neutral.600')
+                            backgroundColor: theme('colors.neutral.400')
                         },
                         hr: {
-                            borderColor: theme('colors.neutral.400')
+                            borderColor: theme('colors.neutral.600')
                         },
                         blockquote: {
-                            color: theme('colors.neutral.900')
+                            color: theme('colors.neutral.100')
                         },
                         h1: {
-                            color: theme('colors.neutral.900'),
+                            color: theme('colors.neutral.100'),
+                            lineHeight: "calc(var(--twgl-base) * 1.5)",
                             marginTop: "var(--twgl-base)",
                             marginBottom: "calc(var(--twgl-base) * 1.25)"
                         },
                         h2: {
-                            color: theme('colors.neutral.900'),
+                            color: theme('colors.neutral.100'),
                             marginTop: "var(--twgl-base)",
                             marginBottom: "var(--twgl-base)"
                         },
                         h3: {
-                            color: theme('colors.neutral.900')
+                            color: theme('colors.neutral.100')
                         },
                         h4: {
-                            color: theme('colors.neutral.900')
+                            color: theme('colors.neutral.100')
                         },
                         'figure figcaption': {
                             color: theme('colors.neutral.500')
                         },
                         code: {
-                            color: theme('colors.neutral.900')
+                            color: theme('colors.neutral.100')
                         },
                         'a code': {
-                            color: theme('colors.neutral.900')
+                            color: theme('colors.neutral.100')
                         },
                         pre: {
                             color: theme('colors.neutral.200'),
                         },
                         thead: {
-                            color: theme('colors.neutral.900'),
+                            color: theme('colors.neutral.100'),
                             borderBottomColor: theme('colors.neutral.300')
                         },
                         'tbody tr': {
