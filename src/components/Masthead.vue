@@ -153,7 +153,7 @@
 		</div>
 
 		<!-- Brightness -->
-		<div class="flex-1 p-3/4 flex flex-col md:max-w-12 md:min-w-12 bg-neutral-900 bg-gradient-to-b from-neutral-900 to-neutral-875">
+		<div class="flex-1 p-3/4 flex flex-col md:max-w-12 md:min-w-12 bg-neutral-900 bg-gradient-to-b from-neutral-950 to-neutral-900">
 			<div class="md:flex-1"></div>
 			<div class="flex gap-1/2">
 				<div>
