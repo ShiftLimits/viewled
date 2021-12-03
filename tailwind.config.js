@@ -15,11 +15,14 @@ module.exports = {
         },
         colors: configureColors(),
         extend: {
+            screens: {
+                mouse: {'hover': 'hover'},
+                xs: '420px',
+            },
             backgroundImage: {
               'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
               'gradient-radial-side': 'radial-gradient(closest-side, var(--tw-gradient-stops))',
             },
-            screens: { xs: '420px' },
             transitionProperty: {
                 'opacity-transform': 'opacity, transform',
             },
