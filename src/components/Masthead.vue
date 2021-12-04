@@ -272,31 +272,37 @@
 
 			<!-- Menu -->
 			<Popover v-slot="{ open }">
-				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full max-w-14 flex flex-col shadow-md z-50">
+				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full max-w-16 flex flex-col shadow-md z-50">
 					<div class="rounded-tl-1/2 md:rounded-tl-none px-3/4 py-1/2 bg-neutral-825 md:bg-gradient-to-tr from-neutral-825 via-neutral-825 to-primary-700/70 flex items-center gap-1/4">
 						<img src="../assets/images/aircookie-logo.png" title="AirCookie" class="h-1-1/2"/>
 						<div class="font-bold text-lg leading-1">WLED</div>
 					</div>
-					<router-link @click="close" class="py-1/2 px-1 mouse:hover:bg-neutral-850 bg-neutral-875" to="/presets" v-slot="{}">
-						Presets
+					<router-link @click="close" class="py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/presets">
+						<SvgIcon name="heart" class="h-1 fill-current" />
+						<div class="flex-1">Presets</div>
 					</router-link>
-					<router-link @click="close" class="py-1/2 px-1 mouse:hover:bg-neutral-850 bg-neutral-875" to="/segments" v-slot="{}">
-						Segments
+					<router-link @click="close" class="py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/segments">
+						<SvgIcon name="segments" class="h-1 fill-current" />
+						<div class="flex-1">Segments</div>
 					</router-link>
-					<router-link @click="close" class="py-1/2 px-1 mouse:hover:bg-neutral-850 bg-neutral-875" to="/info">
-						Device Information
+					<router-link @click="close" class="py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/info">
+						<SvgIcon name="info" class="h-1 fill-current" />
+						<div class="flex-1">Device Information</div>
 					</router-link>
-					<router-link @click="close" class="py-1/2 px-1 mouse:hover:bg-neutral-850 bg-neutral-875" to="/settings">
-						Settings
+					<router-link @click="close" class="py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/settings">
+						<SvgIcon name="settings" class="h-1 fill-current" />
+						<div class="flex-1">Settings</div>
 					</router-link>
-					<button @click="handleSyncClick" class="border-t border-neutral-925 text-left py-1/2 px-1 flex items-center mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+					<button @click="handleSyncClick" class="border-t border-neutral-925 text-left py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+						<SvgIcon name="sync" class="h-1 fill-current" />
 						<div class="flex-1 flex flex-col space-y-1/8">
 							<div class="leading-3/4">Sync</div>
 							<div class="text-neutral-600 leading-1/2 text-xs">Synchronize with other devices</div>
 						</div>
 						<Toggle :modelValue="isSyncActive ? true:undefined" />
 					</button>
-					<button @click="toggleLEDStream" class="border-t border-neutral-925 text-left py-1/2 px-1 flex items-center mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+					<button @click="toggleLEDStream" class="border-t border-neutral-925 text-left py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+						<SvgIcon name="peek" class="h-1 fill-current" />
 						<div class="flex-1 flex flex-col space-y-1/8">
 							<div class="leading-3/4">Peek</div>
 							<div class="text-neutral-600 leading-1/2 text-xs">Show a preview of the device</div>
