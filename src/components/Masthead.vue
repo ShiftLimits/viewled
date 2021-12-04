@@ -215,7 +215,7 @@
 
 			<!-- Effects Sliders -->
 			<Popover v-slot="{ open }">
-				<PopoverPanel class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full flex flex-col shadow-md z-50">
+				<PopoverPanel class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full flex flex-col shadow-md border-b-1/8 md:border-b-0 md:border-t-1/8 border-primary-650 z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Effect Settings</div>
 					<div class="flex-1 p-3/4 flex md:max-w-18 md:min-w-12 bg-neutral-875 gap-1/2">
 						<div class="grid grid-stack">
@@ -255,7 +255,7 @@
 				<ListboxButton class="h-full p-3/4 flex items-center group" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-neutral-950 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<SvgIcon name="palette" class="w-1-1/4 h-1-1/4 fill-white z-10" />
 				</ListboxButton>
-				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 z-50">
+				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 md:border-b-0 md:border-t-1/8 border-primary-650 z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Color Palette</div>
 					<div class="overflow-auto flex-1">
 						<ListboxOption
