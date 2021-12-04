@@ -3,7 +3,7 @@ import { createColorSpaceCCTShader } from './webgl';
 
 export function useColorSpaceCCTShader(canvas:Ref<HTMLCanvasElement|undefined>) {
 	const hue = ref(0)
-	let shader:ReturnType<typeof createColorSpaceShader>
+	let shader:ReturnType<typeof createColorSpaceCCTShader>
 
 	watch(hue, (new_hue) => {
 		if (shader) shader.render(new_hue / 360)

@@ -3,7 +3,7 @@ import { createColorSpaceWheelShader } from './webgl';
 
 export function useColorSpaceWheelShader(canvas:Ref<HTMLCanvasElement|undefined>) {
 	const hue = ref(0)
-	let shader:ReturnType<typeof createColorSpaceShader>
+	let shader:ReturnType<typeof createColorSpaceWheelShader>
 
 	watch(hue, (new_hue) => {
 		if (shader) shader.render(new_hue / 360)
