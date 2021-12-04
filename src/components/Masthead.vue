@@ -1,6 +1,6 @@
 <script setup lang="ts">
 	import { useWLEDClient } from "vue-wled"
-	import { computed, ref, watch } from "vue"
+	import { computed, reactive, ref, watch } from "vue"
 	import throttle from 'lodash/throttle'
 	import { Listbox, ListboxButton, ListboxOptions, ListboxOption, Popover, PopoverButton, PopoverPanel } from "@headlessui/vue"
 	import SvgIcon from "../components/SvgIcon.vue"
@@ -9,8 +9,10 @@
 	import Toggle from "./Toggle.vue"
 	import ProgressCircle from "./ProgressCircle.vue"
 	import SubNavButton from "./SubNavButton.vue"
+import { WLEDPalettesData } from "wled-client"
+import { createGradientCSSFromState } from "../lib/wled"
 
-	const { state, info, effects, palettes, presets, live, nightlight, toggle, updateState, setEffect, setPalette, setEffectSpeed, setEffectIntensity, toggleLEDStream, enableUDPSync, disableUDPSync, setPreset } = useWLEDClient()
+	const { state, info, effects, palettes, presets, live, nightlight, toggle, updateState, setEffect, setPalette, setEffectSpeed, setEffectIntensity, toggleLEDStream, enableUDPSync, disableUDPSync, setPreset, getPalettesData } = useWLEDClient()
 
 	//
 	// Palette selector
@@ -37,6 +39,17 @@
 
 	function isSelectedPalette(palette:string) {
 		return _selected_palette.value == palette
+	}
+
+	let palettes_data = reactive<WLEDPalettesData>({})
+	getPalettesData().then(data => {
+		Object.assign(palettes_data, data)
+	})
+	function getPaletteStyle(palette:string) {
+		if (!palettes_data) return ''
+		let palette_id = palettes.indexOf(palette)
+		let stops = palettes_data[palette_id]
+		return createGradientCSSFromState(state, stops)
 	}
 
 	//
@@ -270,18 +283,19 @@
 				</ListboxButton>
 				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Color Palette</div>
-					<div class="overflow-auto flex-1">
+					<div class="overflow-auto flex-1 divide-y divide-neutral-1000">
 						<ListboxOption
 							v-for="palette in sorted_palettes"
 							:key="palette"
 							:value="palette"
-							class="p-1/2 mouse:hover:bg-neutral-800 cursor-pointer"
+							class="p-1/2 mouse:hover:bg-neutral-800 cursor-pointer space-y-1/4"
 							:class="{
-								'bg-neutral-100 text-black': isSelectedPalette(palette),
+								'bg-neutral-200 text-black': isSelectedPalette(palette),
 								'bg-neutral-900': !isSelectedPalette(palette)
 							}"
 						>
-							{{ palette }}
+							<div class="h-1 w-full overflow-hidden rounded-1/4 border-1/8 border-neutral-1000" :style="{ 'background-image': getPaletteStyle(palette) }"></div>
+							<div class="px-1/4 text-sm leading-1/2">{{ palette }}</div>
 						</ListboxOption>
 					</div>
 				</ListboxOptions>
