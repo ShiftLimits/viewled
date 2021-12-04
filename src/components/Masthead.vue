@@ -138,7 +138,7 @@
 <template>
 	<header class="md:bg-neutral-950 flex flex-col md:flex-row relative">
 		<!-- Device Global Functions -->
-		<div class="flex-1 flex bg-neutral-850">
+		<div class="flex-1 flex bg-neutral-825">
 			<div class="w-4/5% md:w-auto flex divide-x divide-neutral-850">
 				<MastheadNavButton class="flex-1 xs:flex-initial" icon="power" label="Power" @click="toggle()" :active="state.on" />
 				<MastheadNavButton class="flex-1 xs:flex-initial" @click="nightlight.toggle()" :active="state.nightlight.on" v-slot="{ active }">
