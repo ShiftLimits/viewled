@@ -156,7 +156,7 @@
 					<div class="order-1 md:order-3 border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 p-1/2">
 						<div class="font-black">Quick Presets</div>
 					</div>
-					<div class="order-2 h-3-1/2 flex overflow-x-auto bg-neutral-875">
+					<div class="order-2 h-3-1/2 flex overflow-x-auto bg-neutral-875 divide-x divide-neutral-900">
 						<template v-for="(preset, id) in presets">
 							<SubNavButton class="min-w-3-1/2 justify-center text-lg" v-if="preset.label" :key="id" :label="preset.label" :active="(state.playlistId != -1 && state.playlistId == id) || (state.playlistId == -1 && state.presetId == id)" @click="setPreset(id).then(() => close())" />
 						</template>
