@@ -290,16 +290,16 @@
 						Settings
 					</router-link>
 					<button @click="handleSyncClick" class="border-t border-neutral-925 text-left py-1/2 px-1 flex items-center mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
-						<div class="flex-1 flex flex-col">
-							<div>Sync</div>
-							<div class="text-neutral-600 text-xs">Synchronize with other devices</div>
+						<div class="flex-1 flex flex-col space-y-1/8">
+							<div class="leading-3/4">Sync</div>
+							<div class="text-neutral-600 leading-1/2 text-xs">Synchronize with other devices</div>
 						</div>
 						<Toggle :modelValue="isSyncActive ? true:undefined" />
 					</button>
-					<button @click="toggleLEDStream" class="text-left py-1/2 px-1 flex items-center mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
-						<div class="flex-1 flex flex-col">
-							<div>Peek</div>
-							<div class="text-neutral-600 text-xs">Show a preview of the device</div>
+					<button @click="toggleLEDStream" class="border-t border-neutral-925 text-left py-1/2 px-1 flex items-center mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+						<div class="flex-1 flex flex-col space-y-1/8">
+							<div class="leading-3/4">Peek</div>
+							<div class="text-neutral-600 leading-1/2 text-xs">Show a preview of the device</div>
 						</div>
 						<Toggle :modelValue="live.leds ? true:undefined" />
 					</button>
