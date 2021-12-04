@@ -219,7 +219,7 @@ import { createGradientCSSFromState } from "../lib/wled"
 					<SvgIcon name="selector" class="h-1 fill-neutral-100" />
 				</ListboxButton>
 				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-neutral-200 z-50">
-					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Select Effect</div>
+					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Select Effect</div>
 					<div class="overflow-auto flex-1 divide-y divide-neutral-950">
 						<ListboxOption
 							v-for="effect in sorted_effects"
@@ -241,7 +241,7 @@ import { createGradientCSSFromState } from "../lib/wled"
 			<!-- Effects Sliders -->
 			<Popover v-slot="{ open }">
 				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-50">
-					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Effect Settings</div>
+					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Effect Settings</div>
 					<div class="flex-1 p-3/4 flex lg:max-w-18 lg:min-w-12 bg-neutral-875 gap-1/2">
 						<div class="grid grid-stack">
 							<SvgIcon name="speed-dial" class="mt-1/8 w-1-3/4 h-1-3/4 fill-white" :style="{ 'transform':  `rotate(${ ((effect_speed/255) * 180) }deg)` }" />
@@ -281,7 +281,7 @@ import { createGradientCSSFromState } from "../lib/wled"
 					<SvgIcon name="palette" class="w-1-1/4 h-1-1/4 fill-white z-10" />
 				</ListboxButton>
 				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-50">
-					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Color Palette</div>
+					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Color Palette</div>
 					<div class="overflow-auto flex-1 divide-y divide-neutral-1000">
 						<ListboxOption
 							v-for="palette in sorted_palettes"
