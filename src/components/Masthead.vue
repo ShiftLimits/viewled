@@ -187,7 +187,7 @@
 		</div>
 
 		<!-- Bottom -->
-		<div class="flex relative">
+		<div class="flex relative border-t border-neutral-1000 md:border-t-0">
 
 			<!-- Effects -->
 			<Listbox v-model="selected_effect" v-slot="{ open }">
