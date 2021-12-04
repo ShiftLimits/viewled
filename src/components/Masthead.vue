@@ -136,10 +136,10 @@
 </script>
 
 <template>
-	<header class="md:bg-neutral-950 flex flex-col md:flex-row relative">
+	<header class="lg:bg-neutral-950 flex flex-col lg:flex-row relative">
 		<!-- Device Global Functions -->
 		<div class="flex-1 flex bg-neutral-825">
-			<div class="w-4/5% md:w-auto flex divide-x divide-neutral-850">
+			<div class="w-4/5% xs:w-auto flex divide-x divide-neutral-850">
 				<MastheadNavButton class="flex-1 xs:flex-initial" icon="power" label="Power" @click="toggle()" :active="state.on" />
 				<MastheadNavButton class="flex-1 xs:flex-initial" @click="nightlight.toggle()" :active="state.nightlight.on" v-slot="{ active }">
 					<SvgIcon name="nightlight" class="h-1-1/4 fill-current" v-if="!active" />
@@ -152,8 +152,8 @@
 
 			<!-- Presets -->
 			<Popover class="flex-1 flex" v-slot="{ open, close }">
-				<PopoverPanel class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full flex flex-col shadow-md border-b-1/8 md:border-b-0 md:border-t-1/8 border-neutral-200 z-20">
-					<div class="order-1 md:order-3 border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 p-1/2">
+				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-neutral-200 z-20">
+					<div class="order-1 lg:order-3 border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 p-1/2">
 						<div class="font-black">Quick Presets</div>
 					</div>
 					<div class="order-2 h-3-1/2 flex overflow-x-auto bg-neutral-875 divide-x divide-neutral-900">
@@ -169,8 +169,8 @@
 		</div>
 
 		<!-- Brightness -->
-		<div class="flex-1 p-3/4 flex flex-col md:max-w-12 md:min-w-12 bg-neutral-900 bg-gradient-to-b from-neutral-950 to-neutral-900">
-			<div class="md:flex-1"></div>
+		<div class="flex-1 p-3/4 flex flex-col lg:max-w-12 lg:min-w-12 bg-neutral-900 bg-gradient-to-b from-neutral-950 to-neutral-900">
+			<div class="lg:flex-1"></div>
 			<div class="flex gap-1/2">
 				<div>
 					<SvgIcon name="brightness" class="w-1-3/4 h-1-3/4 fill-white" :style="{ 'opacity':  Math.max(0.1, brightness/255) }" />
@@ -187,18 +187,18 @@
 		</div>
 
 		<!-- Bottom -->
-		<div class="flex relative border-t border-neutral-1000 md:border-t-0">
+		<div class="flex relative border-t border-neutral-1000 lg:border-t-0">
 
 			<!-- Effects -->
 			<Listbox v-model="selected_effect" v-slot="{ open }">
-				<ListboxButton class="flex-1 md:w-8 text-left px-1 flex items-center" :class="{ 'bg-neutral-875 bg-gradient-to-br from-neutral-850 to-neutral-900 mouse:hover:from-neutral-850 mouse:hover:to-neutral-875': !open, 'bg-neutral-200 text-black': open }">
+				<ListboxButton class="flex-1 lg:w-8 text-left px-1 flex items-center" :class="{ 'bg-neutral-875 bg-gradient-to-br from-neutral-850 to-neutral-900 mouse:hover:from-neutral-850 mouse:hover:to-neutral-875': !open, 'bg-neutral-200 text-black': open }">
 					<div class="flex-1 flex flex-col overflow-hidden">
 						<div class="text-xs leading-1/2" :class="{ 'text-neutral-400': !open, 'text-neutral-800': open }">Effect</div>
 						<div class="font-medium leading-1 truncate">{{ selected_effect }}</div>
 					</div>
 					<SvgIcon name="selector" class="h-1 fill-neutral-100" />
 				</ListboxButton>
-				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 md:border-b-0 md:border-t-1/8 border-neutral-200 z-50">
+				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-neutral-200 z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Select Effect</div>
 					<div class="overflow-auto flex-1">
 						<ListboxOption
@@ -215,9 +215,9 @@
 
 			<!-- Effects Sliders -->
 			<Popover v-slot="{ open }">
-				<PopoverPanel class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full flex flex-col shadow-md border-b-1/8 md:border-b-0 md:border-t-1/8 border-primary-650 z-50">
+				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Effect Settings</div>
-					<div class="flex-1 p-3/4 flex md:max-w-18 md:min-w-12 bg-neutral-875 gap-1/2">
+					<div class="flex-1 p-3/4 flex lg:max-w-18 lg:min-w-12 bg-neutral-875 gap-1/2">
 						<div class="grid grid-stack">
 							<SvgIcon name="speed-dial" class="mt-1/8 w-1-3/4 h-1-3/4 fill-white" :style="{ 'transform':  `rotate(${ ((effect_speed/255) * 180) }deg)` }" />
 							<SvgIcon name="speed" class="w-1-3/4 h-1-3/4 fill-white" />
@@ -231,7 +231,7 @@
 							<input class="h-3/4" type="range" min="0" max="255" :value="effect_speed" @input="handleEffectSpeedInput" @pointerdown="handleEffectSpeedPointerDown" @pointerup="handleEffectSpeedPointerUp" />
 						</div>
 					</div>
-					<div class="flex-1 p-3/4 flex md:max-w-18 md:min-w-12 bg-neutral-875 gap-1/2">
+					<div class="flex-1 p-3/4 flex lg:max-w-18 lg:min-w-12 bg-neutral-875 gap-1/2">
 						<div>
 							<SvgIcon name="intensity" class="w-1-3/4 h-1-3/4 fill-white" :style="{ 'opacity':  Math.max(0.1, effect_intensity/255) }" />
 						</div>
@@ -255,7 +255,7 @@
 				<ListboxButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<SvgIcon name="palette" class="w-1-1/4 h-1-1/4 fill-white z-10" />
 				</ListboxButton>
-				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 md:border-b-0 md:border-t-1/8 border-primary-650 z-50">
+				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Color Palette</div>
 					<div class="overflow-auto flex-1">
 						<ListboxOption
@@ -272,28 +272,28 @@
 
 			<!-- Menu -->
 			<Popover v-slot="{ open }">
-				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full max-w-16 flex flex-col shadow-md z-50">
-					<div class="rounded-tl-1/2 md:rounded-tl-none px-3/4 py-1/2 bg-neutral-825 md:bg-gradient-to-tr from-neutral-825 via-neutral-825 to-primary-700/70 flex items-center gap-1/4">
+				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full max-w-16 flex flex-col shadow-md z-50">
+					<div class="rounded-tl-1/2 lg:rounded-tl-none px-3/4 py-1/2 bg-neutral-825 lg:bg-gradient-to-tr from-neutral-825 via-neutral-825 to-primary-700/70 flex items-center gap-1/4">
 						<img src="../assets/images/aircookie-logo.png" title="AirCookie" class="h-1-1/2"/>
 						<div class="font-bold text-lg leading-1">WLED</div>
 					</div>
-					<router-link @click="close" class="py-3/4 md:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/presets">
+					<router-link @click="close" class="py-3/4 lg:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/presets">
 						<SvgIcon name="heart" class="h-1 fill-current" />
 						<div class="flex-1">Presets</div>
 					</router-link>
-					<router-link @click="close" class="py-3/4 md:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/segments">
+					<router-link @click="close" class="py-3/4 lg:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/segments">
 						<SvgIcon name="segments" class="h-1 fill-current" />
 						<div class="flex-1">Segments</div>
 					</router-link>
-					<router-link @click="close" class="py-3/4 md:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/info">
+					<router-link @click="close" class="py-3/4 lg:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/info">
 						<SvgIcon name="info" class="h-1 fill-current" />
 						<div class="flex-1">Device Information</div>
 					</router-link>
-					<router-link @click="close" class="py-3/4 md:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/settings">
+					<router-link @click="close" class="py-3/4 lg:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/settings">
 						<SvgIcon name="settings" class="h-1 fill-current" />
 						<div class="flex-1">Settings</div>
 					</router-link>
-					<button @click="handleSyncClick" class="border-t border-neutral-925 text-left py-3/4 md:py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+					<button @click="handleSyncClick" class="border-t border-neutral-925 text-left py-3/4 lg:py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
 						<SvgIcon name="sync" class="h-1 fill-current" />
 						<div class="flex-1 flex flex-col space-y-1/8">
 							<div class="leading-3/4">Sync</div>
@@ -301,7 +301,7 @@
 						</div>
 						<Toggle :modelValue="isSyncActive ? true:undefined" />
 					</button>
-					<button @click="toggleLEDStream" class="border-t border-neutral-925 text-left py-3/4 md:py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+					<button @click="toggleLEDStream" class="border-t border-neutral-925 text-left py-3/4 lg:py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
 						<SvgIcon name="peek" class="h-1 fill-current" />
 						<div class="flex-1 flex flex-col space-y-1/8">
 							<div class="leading-3/4">Peek</div>
@@ -309,7 +309,7 @@
 						</div>
 						<Toggle :modelValue="live.leds ? true:undefined" />
 					</button>
-					<div class="md:rounded-bl-1/2 h-1/2 bg-neutral-825 md:bg-none bg-gradient-to-br from-neutral-825 via-neutral-825 to-primary-700/70"></div>
+					<div class="lg:rounded-bl-1/2 h-1/2 bg-neutral-825 lg:bg-none bg-gradient-to-br from-neutral-825 via-neutral-825 to-primary-700/70"></div>
 				</PopoverPanel>
 				<PopoverButton class="h-full p-1/2 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<img src="../assets/images/cheerful-akemi.png" title="Menu" class="w-1-3/4 h-1-3/4 -mr-3/4 from-primary-0/80 via-primary-300/70 to-primary-500/0" :class="{ 'bg-gradient-radial-side': open, 'opacity-40 mouse:group-hover:opacity-100 mouse:group-hover:bg-gradient-radial-side mix-blend-luminosity mouse:group-hover:mix-blend-normal': !open }" />

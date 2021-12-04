@@ -8,8 +8,8 @@ const {  } = useWLEDClient()
 
 <template>
 	<div class="h-full flex flex-col">
-		<div class="order-7 md:order-2">
-			<div class="h-3-1/4 md:h-3 flex overflow-x-auto divide-x divide-neutral-900 bg-neutral-875">
+		<div class="order-7 lg:order-2">
+			<div class="h-3-1/4 lg:h-3 flex overflow-x-auto divide-x divide-neutral-900 bg-neutral-875">
 				<SubNavButton to="/settings/" icon="settings" label="Device" />
 				<SubNavButton to="/settings/schedule" icon="clock" label="Time" />
 				<SubNavButton to="/settings/WiFi" icon="wifi" label="WiFi" />

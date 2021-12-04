@@ -49,7 +49,7 @@
 
 <template>
 	<div class="h-full flex flex-col items-center justify-center p-1 bg-gradient-radial from-neutral-850 to-transparent">
-		<div class="flex-1 self-stretch flex items-end md:items-center justify-center p-1">
+		<div class="flex-1 self-stretch flex items-end lg:items-center justify-center p-1">
 			<ColorPickerWheel :hue="hue" @update:hue="handleHueInput" :saturation="saturation" @update:saturation="handleSaturationInput" @pointerdown="handleColorPointerDown" @pointerup="handleColorPointerUp" class="w-full max-w-20" />
 		</div>
 	</div>

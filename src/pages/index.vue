@@ -37,7 +37,7 @@
 
 <template>
 	<div class="h-full flex flex-col items-center justify-center p-1 bg-gradient-radial from-neutral-850 to-transparent">
-		<div class="flex-1 self-stretch flex items-end md:items-center justify-center py-1">
+		<div class="flex-1 self-stretch flex items-end lg:items-center justify-center py-1">
 			<div class="grid grid-stack">
 				<div class="flex items-end justify-center text-3xl font-medium">{{ kelvin.toFixed(0) }}K</div>
 				<ColorPickerCCT :kelvin="kelvin" @update:kelvin="handleCCTInput" @pointerdown="handleCCTPointerDown" @pointerup="handleCCTPointerUp" class="w-full max-w-20" />

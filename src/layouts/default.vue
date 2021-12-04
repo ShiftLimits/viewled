@@ -12,7 +12,7 @@
 		<div class="text-4xl font-black">Connecting...</div>
 	</div>
 	<template v-else>
-		<Masthead class="order-7 md:order-2 z-masthead" />
+		<Masthead class="order-7 lg:order-2 z-masthead" />
 		<div class="order-5 flex-1 overflow-y-auto">
 			<router-view />
 		</div>
