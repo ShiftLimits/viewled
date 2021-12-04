@@ -152,7 +152,7 @@
 
 			<!-- Presets -->
 			<Popover class="flex-1 flex" v-slot="{ open, close }">
-				<PopoverPanel class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full flex flex-col shadow-md border-b-1/8 md:border-b-0 md:border-t-1/8 border-primary-650 z-20">
+				<PopoverPanel class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full flex flex-col shadow-md border-b-1/8 md:border-b-0 md:border-t-1/8 border-neutral-200 z-20">
 					<div class="order-1 md:order-3 border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 p-1/2">
 						<div class="font-black">Quick Presets</div>
 					</div>
@@ -163,7 +163,7 @@
 					</div>
 				</PopoverPanel>
 				<PopoverButton as="div" class="flex-1 xs:flex-initial flex z-30">
-					<MastheadNavButton class="border-l border-neutral-850 w-full" :class="{ '': open }" icon="heart" label="Presets" activeClass="bg-gradient-radial from-primary-500 to-primary-700" :active="open" />
+					<MastheadNavButton class="border-l border-neutral-850 w-full" :class="{ '': open }" icon="heart" label="Presets" :active="open" />
 				</PopoverButton>
 			</Popover>
 		</div>
