@@ -187,7 +187,7 @@
 		</div>
 
 		<!-- Bottom -->
-		<div class="flex relative divide-x divide-neutral-875">
+		<div class="flex relative">
 
 			<!-- Effects -->
 			<Listbox v-model="selected_effect" v-slot="{ open }">
@@ -198,7 +198,7 @@
 					</div>
 					<SvgIcon name="selector" class="h-1 fill-neutral-100" />
 				</ListboxButton>
-				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 md:border-b-0 md:border-t-1/8 border-neutral-100 z-50">
+				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 md:border-b-0 md:border-t-1/8 border-neutral-200 z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Select Effect</div>
 					<div class="overflow-auto flex-1">
 						<ListboxOption
@@ -245,14 +245,14 @@
 						</div>
 					</div>
 				</PopoverPanel>
-				<PopoverButton class="h-full p-3/4 flex items-center group" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-925 to-neutral-950 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
+				<PopoverButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<SvgIcon name="sliders" class="w-1-1/4 h-1-1/4 fill-white z-10" />
 				</PopoverButton>
 			</Popover>
 
 			<!-- Color Palette -->
 			<Listbox v-model="selected_palette" v-slot="{ open }">
-				<ListboxButton class="h-full p-3/4 flex items-center group" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-925 to-neutral-950 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
+				<ListboxButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<SvgIcon name="palette" class="w-1-1/4 h-1-1/4 fill-white z-10" />
 				</ListboxButton>
 				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 md:border-b-0 md:border-t-1/8 border-primary-650 z-50">
@@ -311,7 +311,7 @@
 					</button>
 					<div class="md:rounded-bl-1/2 h-1/2 bg-neutral-825 md:bg-none bg-gradient-to-br from-neutral-825 via-neutral-825 to-primary-700/70"></div>
 				</PopoverPanel>
-				<PopoverButton class="h-full p-1/2 flex items-center group" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-925 to-neutral-950 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
+				<PopoverButton class="h-full p-1/2 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<img src="../assets/images/cheerful-akemi.png" title="Menu" class="w-1-3/4 h-1-3/4 -mr-3/4 from-primary-0/80 via-primary-300/70 to-primary-500/0" :class="{ 'bg-gradient-radial-side': open, 'opacity-40 mouse:group-hover:opacity-100 mouse:group-hover:bg-gradient-radial-side mix-blend-luminosity mouse:group-hover:mix-blend-normal': !open }" />
 					<SvgIcon name="menu" class="w-1-3/4 h-1-3/4 fill-white z-10" />
 				</PopoverButton>
