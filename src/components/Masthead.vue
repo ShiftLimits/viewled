@@ -35,6 +35,10 @@
 		}
 	})
 
+	function isSelectedPalette(palette:string) {
+		return _selected_palette.value == palette
+	}
+
 	//
 	// Effect selector
 	const effects_search_query = ref('')
@@ -271,7 +275,11 @@
 							v-for="palette in sorted_palettes"
 							:key="palette"
 							:value="palette"
-							class="p-1/2 bg-neutral-900 mouse:hover:bg-neutral-800 cursor-pointer"
+							class="p-1/2 mouse:hover:bg-neutral-800 cursor-pointer"
+							:class="{
+								'bg-neutral-100 text-black': isSelectedPalette(palette),
+								'bg-neutral-900': !isSelectedPalette(palette)
+							}"
 						>
 							{{ palette }}
 						</ListboxOption>
