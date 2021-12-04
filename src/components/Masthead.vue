@@ -152,7 +152,7 @@
 
 			<!-- Presets -->
 			<Popover class="flex-1 flex" v-slot="{ open, close }">
-				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-neutral-200 z-20">
+				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b lg:border-b-0 lg:border-t border-neutral-200 z-20">
 					<div class="order-1 lg:order-3 border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 p-1/2">
 						<div class="font-black">Quick Presets</div>
 					</div>
