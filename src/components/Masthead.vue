@@ -145,7 +145,6 @@ import { createGradientCSSFromState } from "../lib/wled"
 	// Sync Button
 	const isSyncActive = computed(() => info.syncToggleReceive ? state.udpSync.send && state.udpSync.receive : state.udpSync.send)
 	const handleSyncClick = () => {
-		console.log(!info.syncToggleReceive, state.udpSync.send)
 		if (info.syncToggleReceive && state.udpSync.send && state.udpSync.receive) return disableUDPSync()
 		if (!info.syncToggleReceive && state.udpSync.send) return disableUDPSync()
 		return enableUDPSync()
