@@ -277,23 +277,23 @@
 						<img src="../assets/images/aircookie-logo.png" title="AirCookie" class="h-1-1/2"/>
 						<div class="font-bold text-lg leading-1">WLED</div>
 					</div>
-					<router-link @click="close" class="py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/presets">
+					<router-link @click="close" class="py-3/4 md:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/presets">
 						<SvgIcon name="heart" class="h-1 fill-current" />
 						<div class="flex-1">Presets</div>
 					</router-link>
-					<router-link @click="close" class="py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/segments">
+					<router-link @click="close" class="py-3/4 md:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/segments">
 						<SvgIcon name="segments" class="h-1 fill-current" />
 						<div class="flex-1">Segments</div>
 					</router-link>
-					<router-link @click="close" class="py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/info">
+					<router-link @click="close" class="py-3/4 md:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/info">
 						<SvgIcon name="info" class="h-1 fill-current" />
 						<div class="flex-1">Device Information</div>
 					</router-link>
-					<router-link @click="close" class="py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/settings">
+					<router-link @click="close" class="py-3/4 md:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/settings">
 						<SvgIcon name="settings" class="h-1 fill-current" />
 						<div class="flex-1">Settings</div>
 					</router-link>
-					<button @click="handleSyncClick" class="border-t border-neutral-925 text-left py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+					<button @click="handleSyncClick" class="border-t border-neutral-925 text-left py-3/4 md:py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
 						<SvgIcon name="sync" class="h-1 fill-current" />
 						<div class="flex-1 flex flex-col space-y-1/8">
 							<div class="leading-3/4">Sync</div>
@@ -301,7 +301,7 @@
 						</div>
 						<Toggle :modelValue="isSyncActive ? true:undefined" />
 					</button>
-					<button @click="toggleLEDStream" class="border-t border-neutral-925 text-left py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
+					<button @click="toggleLEDStream" class="border-t border-neutral-925 text-left py-3/4 md:py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
 						<SvgIcon name="peek" class="h-1 fill-current" />
 						<div class="flex-1 flex flex-col space-y-1/8">
 							<div class="leading-3/4">Peek</div>
