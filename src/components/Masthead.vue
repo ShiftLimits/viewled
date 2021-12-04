@@ -8,8 +8,9 @@
 	import AbstractButton from "./AbstractButton.vue"
 	import Toggle from "./Toggle.vue"
 	import ProgressCircle from "./ProgressCircle.vue"
+	import SubNavButton from "./SubNavButton.vue"
 
-	const { state, info, effects, palettes, live, nightlight, toggle, updateState, setEffect, setPalette, setEffectSpeed, setEffectIntensity, toggleLEDStream, enableUDPSync, disableUDPSync } = useWLEDClient()
+	const { state, info, effects, palettes, presets, live, nightlight, toggle, updateState, setEffect, setPalette, setEffectSpeed, setEffectIntensity, toggleLEDStream, enableUDPSync, disableUDPSync, setPreset } = useWLEDClient()
 
 	//
 	// Palette selector
@@ -135,18 +136,36 @@
 </script>
 
 <template>
-	<header class="md:bg-neutral-950 flex flex-col md:flex-row">
+	<header class="md:bg-neutral-950 flex flex-col md:flex-row relative">
 		<!-- Device Global Functions -->
-		<div class="flex-1 flex bg-neutral-850 divide-x divide-neutral-850">
-			<MastheadNavButton icon="power" label="Power" @click="toggle()" :active="state.on" />
-			<MastheadNavButton @click="nightlight.toggle()" :active="state.nightlight.on" v-slot="{ active }">
-				<SvgIcon name="nightlight" class="h-1-1/4 fill-current" v-if="!active" />
-				<ProgressCircle :progress="remaining" class="h-1-1/4 stroke-current" v-else />
-				<div class="leading-2/3 w-1-3/4 flex justify-center" :class="{ 'opacity-60': !active }">Timer</div>
-			</MastheadNavButton>
-			<MastheadNavButton icon="white-balance" label="White" to="/" />
-			<MastheadNavButton icon="rgb-wheel" label="Color" to="/color" />
-			<MastheadNavButton icon="heart" label="Presets" to="/presets" />
+		<div class="flex-1 flex bg-neutral-850">
+			<div class="w-4/5% md:w-auto flex divide-x divide-neutral-850">
+				<MastheadNavButton class="flex-1 xs:flex-initial" icon="power" label="Power" @click="toggle()" :active="state.on" />
+				<MastheadNavButton class="flex-1 xs:flex-initial" @click="nightlight.toggle()" :active="state.nightlight.on" v-slot="{ active }">
+					<SvgIcon name="nightlight" class="h-1-1/4 fill-current" v-if="!active" />
+					<ProgressCircle :progress="remaining" class="h-1-1/4 stroke-current" v-else />
+					<div class="leading-2/3 w-1-3/4 flex justify-center" :class="{ 'opacity-60': !active }">Timer</div>
+				</MastheadNavButton>
+				<MastheadNavButton class="flex-1 xs:flex-initial" icon="white-balance" label="White" to="/" />
+				<MastheadNavButton class="flex-1 xs:flex-initial" icon="rgb-wheel" label="Color" to="/color" />
+			</div>
+
+			<!-- Presets -->
+			<Popover class="flex-1 flex" v-slot="{ open, close }">
+				<PopoverPanel class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full flex flex-col shadow-md border-b-1/8 md:border-b-0 md:border-t-1/8 border-primary-650 z-20">
+					<div class="order-1 md:order-3 border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 p-1/2">
+						<div class="font-black">Quick Presets</div>
+					</div>
+					<div class="order-2 h-3-1/2 flex overflow-x-auto bg-neutral-875">
+						<template v-for="(preset, id) in presets">
+							<SubNavButton class="min-w-3-1/2 justify-center text-lg" v-if="preset.label" :key="id" :label="preset.label" :active="(state.playlistId != -1 && state.playlistId == id) || (state.playlistId == -1 && state.presetId == id)" @click="setPreset(id).then(() => close())" />
+						</template>
+					</div>
+				</PopoverPanel>
+				<PopoverButton as="div" class="flex-1 xs:flex-initial flex z-30">
+					<MastheadNavButton class="border-l border-neutral-850 w-full" :class="{ '': open }" icon="heart" label="Presets" activeClass="bg-gradient-radial from-primary-500 to-primary-700" :active="open" />
+				</PopoverButton>
+			</Popover>
 		</div>
 
 		<!-- Brightness -->
@@ -179,7 +198,7 @@
 					</div>
 					<SvgIcon name="selector" class="h-1 fill-neutral-100" />
 				</ListboxButton>
-				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950">
+				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 md:border-b-0 md:border-t-1/8 border-neutral-100 z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Select Effect</div>
 					<div class="overflow-auto flex-1">
 						<ListboxOption
@@ -196,7 +215,7 @@
 
 			<!-- Effects Sliders -->
 			<Popover v-slot="{ open }">
-				<PopoverPanel class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full flex flex-col shadow-md">
+				<PopoverPanel class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full flex flex-col shadow-md z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Effect Settings</div>
 					<div class="flex-1 p-3/4 flex md:max-w-18 md:min-w-12 bg-neutral-875 gap-1/2">
 						<div class="grid grid-stack">
@@ -236,7 +255,7 @@
 				<ListboxButton class="h-full p-3/4 flex items-center group" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-neutral-950 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<SvgIcon name="palette" class="w-1-1/4 h-1-1/4 fill-white z-10" />
 				</ListboxButton>
-				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950">
+				<ListboxOptions class="absolute bottom-100% md:bottom-0 md:top-100% inset-x-0 md:inset-x-auto md:w-full md:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Color Palette</div>
 					<div class="overflow-auto flex-1">
 						<ListboxOption
@@ -253,11 +272,14 @@
 
 			<!-- Menu -->
 			<Popover v-slot="{ open }">
-				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full max-w-14 flex flex-col shadow-md">
+				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% md:top-100% md:bottom-auto w-full max-w-14 flex flex-col shadow-md z-50">
 					<div class="rounded-tl-1/2 md:rounded-tl-none px-3/4 py-1/2 bg-neutral-825 md:bg-gradient-to-tr from-neutral-825 via-neutral-825 to-primary-700/70 flex items-center gap-1/4">
 						<img src="../assets/images/aircookie-logo.png" title="AirCookie" class="h-1-1/2"/>
 						<div class="font-bold text-lg leading-1">WLED</div>
 					</div>
+					<router-link @click="close" class="py-1/2 px-1 mouse:hover:bg-neutral-850 bg-neutral-875" to="/presets" v-slot="{}">
+						Presets
+					</router-link>
 					<router-link @click="close" class="py-1/2 px-1 mouse:hover:bg-neutral-850 bg-neutral-875" to="/segments" v-slot="{}">
 						Segments
 					</router-link>
