@@ -213,6 +213,7 @@
 							:class="{
 								'bg-neutral-100 text-black': isSelectedEffect(effect),
 								'bg-neutral-900': !isSelectedEffect(effect),
+								'sticky inset-y-0 !border-b -mb-px shadow-lg': effect == 'Solid'
 							}"
 						>
 							{{ effect }}
