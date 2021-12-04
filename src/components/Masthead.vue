@@ -59,6 +59,10 @@
 		}
 	})
 
+	function isSelectedEffect(effect:string) {
+		return _selected_effect.value == effect
+	}
+
 	//
 	// Effect Sliders
 	let isDraggingEffectSpeed = false
@@ -205,7 +209,11 @@
 							v-for="effect in sorted_effects"
 							:key="effect"
 							:value="effect"
-							class="p-1/2 bg-neutral-900 mouse:hover:bg-neutral-800 cursor-pointer"
+							class="p-1/2 mouse:hover:bg-neutral-800 cursor-pointer"
+							:class="{
+								'bg-neutral-100 text-black': isSelectedEffect(effect),
+								'bg-neutral-900': !isSelectedEffect(effect),
+							}"
 						>
 							{{ effect }}
 						</ListboxOption>
