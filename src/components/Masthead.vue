@@ -204,7 +204,7 @@
 				</ListboxButton>
 				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-neutral-200 z-50">
 					<div class="bg-neutral-825 px-1/2 py-3/4 font-bold">Select Effect</div>
-					<div class="overflow-auto flex-1">
+					<div class="overflow-auto flex-1 divide-y divide-neutral-950">
 						<ListboxOption
 							v-for="effect in sorted_effects"
 							:key="effect"
