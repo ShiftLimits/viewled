@@ -7,6 +7,7 @@ const {  } = useWLEDClient()
 <template>
 	<div class="p-1 prose mt-0">
 		<h1>User Interface Settings</h1>
+		<h2>White Temperature</h2>
 		<h2>Color Selection</h2>
 		<h2>Appearance</h2>
 	</div>
