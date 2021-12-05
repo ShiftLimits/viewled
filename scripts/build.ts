@@ -136,7 +136,7 @@ ${ toHexString(gzip_buffer) }
 	}
 
 	// Write an index file that imports all our static assets
-	await writeFile(toAbsolute('../dist/wled00/web_ui.h'), wled_ui_imports)
+	await writeFile(toAbsolute('../dist/wled00/viewled_ui.h'), wled_ui_imports)
 
 	const viewled_server_data = `void initVieWLEDServer()
 {
