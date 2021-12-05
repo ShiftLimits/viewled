@@ -18,3 +18,7 @@ export function buildWLEDServerRoute(route:string, file:string, mimetype:string)
 		request->send(response);
 	});`
 }
+
+export function makeStringVariableSafe(string:string) {
+	return string.replace(/[^a-zA-Z\d_]/g, '_')
+}
