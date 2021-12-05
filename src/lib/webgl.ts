@@ -48,6 +48,7 @@ export function createShaderProgram(canvas:HTMLCanvasElement, vertex_source:stri
 	}
 
 	return {
+		gl,
 		render,
 		destroy,
 		createUniform: (type:WebGLUniformType, name:string) => createUniform(gl, program, type, name),
