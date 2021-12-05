@@ -300,6 +300,16 @@ import { createGradientCSSFromState } from "../lib/wled"
 				</ListboxOptions>
 			</Listbox>
 
+			<!-- Segments -->
+			<Popover v-if="state.segments.length > 1" v-slot="{ open }">
+				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-50">
+					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Segments</div>
+				</PopoverPanel>
+				<PopoverButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
+					<SvgIcon name="segments" class="w-1-1/4 h-1-1/4 fill-white z-10" />
+				</PopoverButton>
+			</Popover>
+
 			<!-- Menu -->
 			<Popover v-slot="{ open }">
 				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full max-w-16 flex flex-col shadow-md z-50">
