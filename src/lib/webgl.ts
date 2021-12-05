@@ -109,3 +109,25 @@ export function createAttribute(gl:WebGL2RenderingContext, program:WebGLProgram,
 	let location = gl.getAttribLocation(program, name)
 	return location
 }
+
+const buffers:Map<WebGL2RenderingContext, WebGLBuffer[]> = new Map()
+function addBuffer(gl:WebGL2RenderingContext, buffer:WebGLBuffer) {
+	let gl_buffers = buffers.get(gl) || []
+	buffers.set(gl, [...gl_buffers, buffer])
+}
+
+export function releaseBuffers(gl:WebGL2RenderingContext) {
+	for (let buffer of buffers.get(gl) || []) gl.deleteBuffer(buffer)
+	buffers.set(gl, [])
+}
+
+export function createBuffer(gl:WebGL2RenderingContext, data:ArrayBufferView | ArrayBuffer | null, usage:number = gl.STATIC_DRAW) {
+	const buffer = gl.createBuffer()
+	if (!buffer) throw new Error('Unable to create buffer')
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
+  gl.bufferData(gl.ARRAY_BUFFER, data, usage)
+	addBuffer(gl, buffer)
+
+	return buffer
+}
