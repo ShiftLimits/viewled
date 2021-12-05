@@ -26,7 +26,7 @@ export function createShaderProgram(canvas:HTMLCanvasElement, vertex_source:stri
 	resize_observer.observe(canvas)
 
 	// This function runs the webgl program
-	function render() {
+	function render(draw = true) {
 		if (!gl) return
 
 		// Resize viewport to DOM resolution and set resolution uniform
@@ -37,7 +37,7 @@ export function createShaderProgram(canvas:HTMLCanvasElement, vertex_source:stri
 		gl.viewport(0, 0, width, height)
 		setResolution([width, height])
 
-		gl.drawArrays(gl.TRIANGLE_FAN, 0, 3) // Draw
+		if (draw) gl.drawArrays(gl.TRIANGLE_FAN, 0, 3) // Draw
 	}
 
 	function destroy() {
