@@ -38,6 +38,11 @@ export function createShaderProgram(canvas:HTMLCanvasElement, vertex_source:stri
 		setResolution([width, height])
 
 		if (draw) gl.drawArrays(gl.TRIANGLE_FAN, 0, 3) // Draw
+
+		return {
+			width, height,
+			ratio: width/height
+		}
 	}
 
 	function destroy() {
