@@ -105,7 +105,7 @@ ${ toHexString(gzip_buffer) }
 	const static_assets = await readdir(toAbsolute('../dist/static/assets'))
 	for (const asset of static_assets) { // Loop through each asset file
 		const { ext, name } = parse(asset) // Split extension and file name
-		const asset_name = name.replace(/\./g, '_') // Replace all `.` in the asset name with `_` (eg `index.6d94cf91` -> `index_6d94cf91`)
+		const asset_name = name.replace(/\.|-/g, '_') // Replace all `.` in the asset name with `_` (eg `index.6d94cf91` -> `index_6d94cf91`)
 
 		const content = await readFile(toAbsolute('../dist/static/assets', asset)) // Read the asset file's content
 		const gzip_buffer = await gzip(content, { level: ZLIB.Z_BEST_COMPRESSION }) // Compress the asset file's content
