@@ -229,7 +229,7 @@ import { createGradientCSSFromState } from "../lib/wled"
 							:class="{
 								'bg-neutral-100 text-black': isSelectedEffect(effect),
 								'bg-neutral-900': !isSelectedEffect(effect),
-								'sticky inset-y-0 !border-b -mb-px shadow-lg': effect == 'Solid'
+								'sticky inset-y-0 !border-b -mb-px bg-gradient-to-r from-primary-300/5 to-transparent': effect == 'Solid'
 							}"
 						>
 							{{ effect }}
