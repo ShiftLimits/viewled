@@ -32,6 +32,10 @@
 	.square-only-child > :only-child {
 		border-radius: 0 !important;
 	}
+
+	.pixellated {
+		image-rendering: pixelated;
+	}
 }
 
 html,
