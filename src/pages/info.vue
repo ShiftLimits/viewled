@@ -8,7 +8,7 @@ const { info, reboot } = useWLEDClient()
 <template>
 	<div class="p-1">
 		<div class="flex flex-col gap-1">
-			<img src="../assets/images/wled-logo-akemi.png" class="w-full max-w-md" title="WLED" />
+			<img src="../assets/images/wled-logo-akemi.png" class="w-full max-w-md pixellated" title="WLED" />
 			<pre>{{ info }}</pre>
 			<button @click="reboot" class="p-1/2 rounded-1/2 bg-neutral-700 mouse:hover:bg-neutral-800">Reboot</button>
 		</div>

@@ -313,8 +313,8 @@ import { createGradientCSSFromState } from "../lib/wled"
 			<!-- Menu -->
 			<Popover v-slot="{ open }">
 				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full max-w-16 flex flex-col shadow-md z-50">
-					<div class="rounded-tl-1/2 lg:rounded-tl-none px-3/4 py-1/2 bg-neutral-825 lg:bg-gradient-to-tr from-neutral-825 via-neutral-825 to-primary-700/70 flex items-center gap-1/4">
-						<img src="../assets/images/aircookie-logo.png" title="AirCookie" class="h-1-1/2"/>
+					<div class="rounded-tl-1/2 lg:rounded-tl-none px-3/4 py-1/2 bg-neutral-825 lg:bg-gradient-to-tr from-neutral-825 via-neutral-825 to-primary-700/70 flex items-center gap-1/2">
+						<img src="../assets/images/aircookie-logo.png" title="AirCookie" class="h-1 pixellated"/>
 						<div class="font-bold text-lg leading-1">WLED</div>
 					</div>
 					<router-link @click="close" class="py-3/4 lg:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/presets">
@@ -352,7 +352,7 @@ import { createGradientCSSFromState } from "../lib/wled"
 					<div class="lg:rounded-bl-1/2 h-1/2 bg-neutral-825 lg:bg-none bg-gradient-to-br from-neutral-825 via-neutral-825 to-primary-700/70"></div>
 				</PopoverPanel>
 				<PopoverButton class="h-full p-1/2 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
-					<img src="../assets/images/cheerful-akemi.png" title="Menu" class="w-1-3/4 h-1-3/4 -mr-3/4 from-primary-0/80 via-primary-300/70 to-primary-500/0" :class="{ 'bg-gradient-radial-side': open, 'opacity-40 mouse:group-hover:opacity-100 mouse:group-hover:bg-gradient-radial-side mix-blend-luminosity mouse:group-hover:mix-blend-normal': !open }" />
+					<img src="../assets/images/cheerful-akemi.png" title="Menu" class="pixellated w-1-3/4 h-1-3/4 -mr-3/4 from-primary-0/80 via-primary-300/70 to-primary-500/0" :class="{ 'bg-gradient-radial-side': open, 'opacity-40 mouse:group-hover:opacity-100 mouse:group-hover:bg-gradient-radial-side mix-blend-luminosity mouse:group-hover:mix-blend-normal': !open }" />
 					<SvgIcon name="menu" class="w-1-3/4 h-1-3/4 fill-white z-10" />
 				</PopoverButton>
 			</Popover>
