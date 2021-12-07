@@ -11,6 +11,7 @@
 	import SubNavButton from "./SubNavButton.vue"
 import { WLEDPalettesData } from "wled-client"
 import { createGradientCSSFromState } from "../lib/wled"
+import Checkbox from "./Checkbox.vue"
 
 	const { state, info, effects, palettes, presets, live, nightlight, toggle, updateState, setEffect, setPalette, setEffectSpeed, setEffectIntensity, toggleLEDStream, enableUDPSync, disableUDPSync, setPreset, getPalettesData } = useWLEDClient()
 
@@ -304,6 +305,16 @@ import { createGradientCSSFromState } from "../lib/wled"
 			<Popover v-if="state.segments.length > 1" v-slot="{ open }">
 				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-50">
 					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Segments</div>
+					<div class="max-h-3/4-screen overflow-y-auto flex flex-col">
+						<div v-for="(segment, id) in state.segments" :key="id" class="px-1/2 bg-neutral-900 flex items-center gap-1/2">
+							<div class="">
+								<Checkbox :modelValue="segment.selected" />
+							</div>
+							<div class="flex-1 py-1/2">
+								{{ segment.name || `Segment ${ segment.id }` }}
+							</div>
+						</div>
+					</div>
 				</PopoverPanel>
 				<PopoverButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<SvgIcon name="segments" class="w-1-1/4 h-1-1/4 fill-white z-10" />

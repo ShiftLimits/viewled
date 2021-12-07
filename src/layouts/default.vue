@@ -2,8 +2,9 @@
 	import { useWLEDClient } from 'vue-wled'
 	import Masthead from '../components/Masthead.vue'
 	import SvgIcon from '../components/SvgIcon.vue'
+	import LiveLedPreview from '../components/LiveLedPreview.vue'
 
-	const { connecting, info } = useWLEDClient()
+	const { connecting, info, live } = useWLEDClient()
 </script>
 
 <template>
@@ -13,6 +14,9 @@
 	</div>
 	<template v-else>
 		<div class="lg:hidden p-1/2 bg-gradient-to-br from-neutral-750 to-neutral-850 leading-3/4 font-bold text-lg text-neutral-100">{{ info.name }}</div>
+		<div v-if="live.leds" class="order-4 lg:order-3 h-1 bg-gradient-to-b from-neutral-900 to-neutral-925 relative flex items-center justify-center z-[999999]">
+			<LiveLedPreview class="absolute w-[300%] h-[300%]" />
+		</div>
 		<Masthead class="order-7 lg:order-2 z-masthead" />
 		<div class="order-5 flex-1 overflow-y-auto">
 			<router-view />
