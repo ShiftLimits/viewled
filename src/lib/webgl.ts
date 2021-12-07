@@ -27,7 +27,7 @@ export function createShaderProgram(canvas:HTMLCanvasElement, vertex_source:stri
 
 	// This function runs the webgl program
 	function render(draw = true) {
-		if (!gl) return
+		if (!gl) return {}
 
 		// Resize viewport to DOM resolution and set resolution uniform
 		const canvas_rect = canvas.getBoundingClientRect()
