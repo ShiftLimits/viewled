@@ -14,6 +14,8 @@ export function createAppRouter(options:AppRouterOptions = {}) {
 	const routes:RouteRecordRaw[] = [
 		{ path: '/', component: () => import('./pages/index.vue') },
 		{ path: '/color', component: () => import('./pages/color.vue') },
+		{ path: '/presets', component: () => import('./pages/presets.vue') },
+		{ path: '/segments', component: () => import('./pages/segments.vue') },
 		{ path: '/info', component: () => import('./pages/info.vue') },
 		{ path: '/settings', component: () => import('./pages/settings.vue'), children: [
 			{ path: 'schedule', component: () => import('./pages/settings/time.vue') },
@@ -24,6 +26,10 @@ export function createAppRouter(options:AppRouterOptions = {}) {
 			{ path: 'update', component: () => import('./pages/settings/update.vue') },
 			{ path: ':pathMatch(.*)*', component: () => import('./pages/settings/index.vue') },
 		] },
+		{ path: '/liveview', component: () => import('./pages/liveview.vue') },
+		{ path: '/dmxmap', component: () => import('./pages/dmxmap.vue') },
+		{ path: '/welcome', component: () => import('./pages/welcome.vue') },
+		{ path: '/reset', component: () => import('./pages/reset.vue') },
 		{ path: '/:pathMatch(.*)*', component: () => import('./pages/404.vue') }
 	]
 
