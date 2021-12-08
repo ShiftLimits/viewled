@@ -124,7 +124,7 @@ import Checkbox from "./Checkbox.vue"
 	//
 	// Brightness Slider
 	let isDraggingBrightness = false
-	const _brightness = ref<number>(state.brightness||100)
+	const _brightness = ref<number>(state.brightness||255)
 	watch<number|undefined>(() => state.brightness, (new_value) => { if (!isDraggingBrightness) _brightness.value = new_value || 0 }, { immediate: true, flush: 'sync' })
 
 	const setBrightness = throttle((brightness) => updateState({ brightness, temporaryTransition: 1 }), 100)
@@ -194,15 +194,15 @@ import Checkbox from "./Checkbox.vue"
 			<div class="lg:flex-1"></div>
 			<div class="flex gap-1/2">
 				<div>
-					<SvgIcon name="brightness" class="w-1-3/4 h-1-3/4 fill-white" :style="{ 'opacity':  Math.max(0.1, brightness/100) }" />
+					<SvgIcon name="brightness" class="w-1-3/4 h-1-3/4 fill-white" :style="{ 'opacity':  Math.max(0.1, brightness/255) }" />
 				</div>
 				<div class="flex-1 flex flex-col justify-end gap-1/4">
 					<div class="justify-self-end flex text-xs leading-1/2">
 						<div class="text-neutral-200">Brightness</div>
 						<div class="flex-1"></div>
-						<div class="font-bold">{{ brightness }}/100</div>
+						<div class="font-bold">{{ brightness }}/255</div>
 					</div>
-					<input class="h-3/4" type="range" min="0" max="100" :value="brightness" @input="handleBrightnessInput" @pointerdown="handleBrightnessPointerDown" @pointerup="handleBrightnessPointerUp" />
+					<input class="h-3/4" type="range" min="0" max="255" :value="brightness" @input="handleBrightnessInput" @pointerdown="handleBrightnessPointerDown" @pointerup="handleBrightnessPointerUp" />
 				</div>
 			</div>
 		</div>
