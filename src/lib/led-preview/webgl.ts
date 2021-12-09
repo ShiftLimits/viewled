@@ -25,7 +25,7 @@ const shape_texcoords_data = new Float32Array([
 export function createLEDPreviewShader(canvas:HTMLCanvasElement) {
 	const { gl, createUniform, createAttribute, render, destroy } = createShaderProgram(canvas, LEDPreviewVertexSource, LEDPreviewFragmentSource)
 	gl.enable(gl.BLEND)
-	gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA)
+	gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE, gl.SRC_ALPHA_SATURATE, gl.ONE_MINUS_SRC_ALPHA)
 
 	const color_attribute_location = createAttribute('a_color')
 	const position_attribute_location = createAttribute('a_position')
