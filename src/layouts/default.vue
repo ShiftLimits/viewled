@@ -14,6 +14,7 @@
 	</div>
 	<template v-else>
 		<div v-if="live.leds" class="order-4 lg:order-3 h-1 bg-gradient-to-b from-neutral-900 to-neutral-925 relative flex items-center justify-center z-peek">
+			<LiveLedPreview class="absolute w-[300%] h-[300%] pointer-events-none" />
 		</div>
 		<Masthead class="order-7 lg:order-2" />
 		<div class="order-5 flex-1 overflow-y-auto">
