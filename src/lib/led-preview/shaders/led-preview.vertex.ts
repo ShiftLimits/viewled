@@ -33,7 +33,7 @@ void main() {
 		(-offset) + (pos * offset * 2.), 0, 0, 1
 	);
 
-	float scale = 1.0;//0.86 * min(1.0, resolution.x / (f_total_leds * (resolution.y*0.5)));
+	float scale = pow(3.0 * min(1.0, resolution.x / (f_total_leds * (resolution.y*0.5))), 0.65);
 	mat4 scale_matrix = mat4(
 		scale, 0,									 0, 0,
 		0, 									scale, 0, 0,
