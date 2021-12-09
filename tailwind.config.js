@@ -30,8 +30,10 @@ module.exports = {
                 'out-long': 'cubic-bezier(.2,.38,.25,1)'
             },
             zIndex: {
-                '-1': '-1',
-                'masthead': 99999
+                'behind': -1,
+                'masthead': 50000,
+                'peek': 60000,
+                'popover': 100000
             },
             spacing: {
                 px: '1px'
