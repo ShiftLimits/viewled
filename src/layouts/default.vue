@@ -13,9 +13,7 @@
 		<div class="text-4xl font-black">Connecting...</div>
 	</div>
 	<template v-else>
-		<div class="lg:hidden p-1/2 bg-gradient-to-br from-neutral-750 to-neutral-850 leading-3/4 font-bold text-lg text-neutral-100">{{ info.name }}</div>
-		<div v-if="live.leds" class="order-4 lg:order-3 h-1 bg-gradient-to-b from-neutral-900 to-neutral-925 relative flex items-center justify-center z-[999999]">
-			<LiveLedPreview class="absolute w-[300%] h-[300%]" />
+		<div v-if="live.leds" class="order-4 lg:order-3 h-1 bg-gradient-to-b from-neutral-900 to-neutral-925 relative flex items-center justify-center z-peek">
 		</div>
 		<Masthead class="order-7 lg:order-2" />
 		<div class="order-5 flex-1 overflow-y-auto">
