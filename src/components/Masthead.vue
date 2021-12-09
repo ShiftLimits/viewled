@@ -212,14 +212,14 @@ import Checkbox from "./Checkbox.vue"
 
 			<!-- Effects -->
 			<Listbox v-model="selected_effect" v-slot="{ open }">
-				<ListboxButton class="flex-1 lg:w-8 text-left px-1 flex items-center" :class="{ 'bg-neutral-875 bg-gradient-to-br from-neutral-850 to-neutral-900 mouse:hover:from-neutral-850 mouse:hover:to-neutral-875': !open, 'bg-neutral-200 text-black': open }">
+				<ListboxButton class="flex-1 lg:w-8 text-left px-1 flex items-center" :class="{ 'bg-neutral-875 bg-gradient-to-br from-neutral-850 to-neutral-900 mouse:hover:from-neutral-850 mouse:hover:to-neutral-875': !open, 'bg-neutral-200 text-black z-popover': open }">
 					<div class="flex-1 flex flex-col overflow-hidden">
 						<div class="text-xs leading-1/2" :class="{ 'text-neutral-400': !open, 'text-neutral-800': open }">Effect</div>
 						<div class="font-medium leading-1 truncate">{{ selected_effect }}</div>
 					</div>
 					<SvgIcon name="selector" class="h-1 fill-neutral-100" />
 				</ListboxButton>
-				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-neutral-200 z-50">
+				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-neutral-200 z-popover">
 					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Select Effect</div>
 					<div class="overflow-auto flex-1 divide-y divide-neutral-950">
 						<ListboxOption
@@ -241,7 +241,7 @@ import Checkbox from "./Checkbox.vue"
 
 			<!-- Effects Sliders -->
 			<Popover v-slot="{ open }">
-				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-50">
+				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-popover">
 					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Effect Settings</div>
 					<div class="flex-1 p-3/4 flex lg:max-w-18 lg:min-w-12 bg-neutral-875 gap-1/2">
 						<div class="grid grid-stack">
@@ -271,17 +271,17 @@ import Checkbox from "./Checkbox.vue"
 						</div>
 					</div>
 				</PopoverPanel>
-				<PopoverButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
+				<PopoverButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700 z-popover': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<SvgIcon name="sliders" class="w-1-1/4 h-1-1/4 fill-white z-10" />
 				</PopoverButton>
 			</Popover>
 
 			<!-- Color Palette -->
 			<Listbox v-model="selected_palette" v-slot="{ open }">
-				<ListboxButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
+				<ListboxButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700 z-popover': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<SvgIcon name="palette" class="w-1-1/4 h-1-1/4 fill-white z-10" />
 				</ListboxButton>
-				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-50">
+				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-popover">
 					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Color Palette</div>
 					<div class="overflow-auto flex-1 divide-y divide-neutral-1000">
 						<ListboxOption
@@ -303,7 +303,7 @@ import Checkbox from "./Checkbox.vue"
 
 			<!-- Segments -->
 			<Popover v-if="state.segments.length > 1" v-slot="{ open }">
-				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-50">
+				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-popover">
 					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Segments</div>
 					<div class="max-h-3/4-screen overflow-y-auto flex flex-col">
 						<div v-for="(segment, id) in state.segments" :key="id" class="px-1/2 bg-neutral-900 flex items-center gap-1/2">
@@ -316,14 +316,14 @@ import Checkbox from "./Checkbox.vue"
 						</div>
 					</div>
 				</PopoverPanel>
-				<PopoverButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
+				<PopoverButton class="h-full p-3/4 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700 z-popover': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<SvgIcon name="segments" class="w-1-1/4 h-1-1/4 fill-white z-10" />
 				</PopoverButton>
 			</Popover>
 
 			<!-- Menu -->
 			<Popover v-slot="{ open }">
-				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full max-w-16 flex flex-col shadow-md z-50">
+				<PopoverPanel v-slot="{ close }" class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full max-w-16 flex flex-col shadow-md z-popover">
 					<div class="rounded-tl-1/2 lg:rounded-tl-none px-3/4 py-1/2 bg-neutral-825 lg:bg-gradient-to-tr from-neutral-825 via-neutral-825 to-primary-700/70 flex items-center gap-1/2">
 						<img src="../assets/images/aircookie-logo.png" title="AirCookie" class="h-1 pixellated"/>
 						<div class="font-bold text-lg leading-1">WLED</div>
@@ -362,7 +362,7 @@ import Checkbox from "./Checkbox.vue"
 					</button>
 					<div class="lg:rounded-bl-1/2 h-1/2 bg-neutral-825 lg:bg-none bg-gradient-to-br from-neutral-825 via-neutral-825 to-primary-700/70"></div>
 				</PopoverPanel>
-				<PopoverButton class="h-full p-1/2 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
+				<PopoverButton class="h-full p-1/2 flex items-center group border-l border-neutral-1000" :class="{ 'bg-gradient-radial from-primary-500 to-primary-700 z-popover': open, 'bg-gradient-to-b from-neutral-900 to-neutral-925 mouse:hover:bg-gradient-radial mouse:hover:from-primary-500 mouse:hover:to-primary-700': !open }">
 					<img src="../assets/images/cheerful-akemi.png" title="Menu" class="pixellated w-1-3/4 h-1-3/4 -mr-3/4 from-primary-0/80 via-primary-300/70 to-primary-500/0" :class="{ 'bg-gradient-radial-side': open, 'opacity-40 mouse:group-hover:opacity-100 mouse:group-hover:bg-gradient-radial-side mix-blend-luminosity mouse:group-hover:mix-blend-normal': !open }" />
 					<SvgIcon name="menu" class="w-1-3/4 h-1-3/4 fill-white z-10" />
 				</PopoverButton>
