@@ -34,9 +34,9 @@ import { hsvToRGB } from '../lib/color';
 <template>
 	<SliderPolar v-model:angle="point.angle" :angle-max="100" v-model:distance="point.distance" :distance-max="100">
 		<template #handle>
-			<svg viewBox="0 0 100 100" class="w-2 h-2">
-				<circle cx="50" cy="50" r="40" stroke-width="6" class="stroke-black fill-transparent" />
-				<circle cx="50" cy="50" r="34" stroke-width="5" class="stroke-white" :style="{ 'fill': `rgb(${color.r}, ${color.g}, ${color.b})` }" />
+			<svg viewBox="0 0 100 100" class="w-2-1/2 h-2-1/2">
+				<circle cx="50" cy="50" r="40" stroke-width="5" class="stroke-black fill-transparent" />
+				<circle cx="50" cy="50" r="35" stroke-width="4" class="stroke-white" :style="{ 'fill': `rgb(${color.r}, ${color.g}, ${color.b})` }" />
 			</svg>
 		</template>
 		<div class="relative min-w-1" :style="{'aspect-ratio': '1/1'}">
