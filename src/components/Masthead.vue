@@ -13,7 +13,7 @@ import { WLEDPalettesData } from "wled-client"
 import { createGradientCSSFromState } from "../lib/wled"
 import Checkbox from "./Checkbox.vue"
 
-	const { state, info, effects, palettes, presets, live, nightlight, toggle, updateState, setEffect, setPalette, setEffectSpeed, setEffectIntensity, toggleLEDStream, enableUDPSync, disableUDPSync, setPreset, getPalettesData } = useWLEDClient()
+	const { state, info, effects, palettes, presets, live, nightlight, toggle, updateState, updateSegment, setEffect, setPalette, setEffectSpeed, setEffectIntensity, toggleLEDStream, enableUDPSync, disableUDPSync, setPreset, getPalettesData } = useWLEDClient()
 
 	//
 	// Palette selector
@@ -174,7 +174,7 @@ import Checkbox from "./Checkbox.vue"
 
 				<!-- Presets -->
 				<Popover class="flex-1 flex" v-slot="{ open, close }">
-					<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b lg:border-b-0 lg:border-t border-neutral-200 z-20">
+					<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b lg:border-b-0 lg:border-t border-neutral-200 z-popover">
 						<div class="order-1 lg:order-3 border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 p-1/2">
 							<div class="font-black">Quick Presets</div>
 						</div>
@@ -307,14 +307,21 @@ import Checkbox from "./Checkbox.vue"
 			<Popover v-if="state.segments.length > 1" v-slot="{ open }">
 				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-popover">
 					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Segments</div>
-					<div class="max-h-3/4-screen overflow-y-auto flex flex-col">
-						<div v-for="(segment, id) in state.segments" :key="id" class="px-1/2 bg-neutral-900 flex items-center gap-1/2">
-							<div class="">
-								<Checkbox :modelValue="segment.selected" />
+					<div class="max-h-3/4-screen overflow-y-auto flex flex-col divide-y divide-neutral-950">
+						<div v-for="(segment, id) in state.segments" :key="id" class="bg-neutral-900 flex">
+							<div class="flex-1 px-3/4 py-1/2 flex flex-col gap-1/2">
+								<div class="flex items-center gap-1/2">
+									<Checkbox :modelValue="segment.selected" @change="({ target }) => updateSegment(segment.id, { selected: target.value })" class="unit-1-1/4" />
+									<div class="flex-1 leading-3/4">{{ segment.name || `Segment ${ segment.id }` }}</div>
+								</div>
+								<div class="flex items-center gap-1/2">
+									<SvgIcon name="brightness" class="fill-current h-1" />
+									<input type="range" :value="segment.brightness" @change="({target}) => updateSegment(segment.id, { brightness: parseInt(target.value) })" min="0" max="255" class="w-full" />
+								</div>
 							</div>
-							<div class="flex-1 py-1/2">
-								{{ segment.name || `Segment ${ segment.id }` }}
-							</div>
+							<AbstractButton @click="toggle({ segmentId: segment.id })" class="border-l border-neutral-950 flex items-center justify-center p-1" :class="{ 'bg-neutral-200 text-black': segment.on }">
+								<SvgIcon name="power" class="h-1 fill-current" />
+							</AbstractButton>
 						</div>
 					</div>
 				</PopoverPanel>
