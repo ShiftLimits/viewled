@@ -1,6 +1,6 @@
 <template>
-	<div class="cursor-pointer relative overflow-hidden rounded-1/4 w-1 h-1 bg-neutral-800 focus-within:ring-1/8 text-neutral-200">
-		<div v-if="value" class="p-1/8">
+	<div class="cursor-pointer relative overflow-hidden rounded-3/8 w-1 h-1 bg-neutral-750 focus-within:ring-1/8 text-neutral-200">
+		<div v-if="value" class="p-1/4">
 			<SvgIcon name="check" class="fill-current" />
 		</div>
 		<input class="opacity-0 absolute inset-0 cursor-pointer outline-none" type="checkbox" v-model="value" />
