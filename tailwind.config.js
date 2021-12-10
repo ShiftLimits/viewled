@@ -1,12 +1,10 @@
 const { configureColors } = require('tailwindcss-color-suite')
 
 module.exports = {
-    purge: [
+    content: [
         './index.html',
         './src/**/*.{js,ts,vue}',
     ],
-    mode: 'jit',
-    darkMode: false, // or 'media' or 'class'
     theme: {
         base: {
             default: '20px',
@@ -16,7 +14,7 @@ module.exports = {
         colors: configureColors(),
         extend: {
             screens: {
-                mouse: {'hover': 'hover'},
+                mouse: { 'raw': '(hover: hover) and (pointer: fine)' },
                 xs: '420px',
             },
             backgroundImage: {
@@ -123,9 +121,6 @@ module.exports = {
                 }
             })
         },
-    },
-    variants: {
-        extend: {},
     },
     plugins: [
         require('tailwindcss-gridlines'),
