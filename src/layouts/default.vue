@@ -13,7 +13,7 @@
 		<div class="text-4xl font-black">Connecting...</div>
 	</div>
 	<template v-else>
-		<div v-if="live.leds" class="order-4 lg:order-3 h-1 bg-gradient-to-b from-neutral-900 to-neutral-925 relative flex items-center justify-center z-peek">
+		<div v-if="live.leds" class="order-4 lg:order-3 h-1-1/2 bg-gradient-to-b from-neutral-900 to-neutral-925 relative flex items-center justify-center z-peek">
 			<LiveLedPreview class="absolute w-[300%] h-[300%] pointer-events-none" />
 		</div>
 		<Masthead class="order-7 lg:order-2" />
