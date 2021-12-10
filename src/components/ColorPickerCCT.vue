@@ -32,7 +32,7 @@ import { cctToRGB } from '../lib/color';
 			</svg>
 		</template>
 		<div class="relative min-w-1 flex items-center justify-center overflow-hidden">
-			<canvas ref="color_space_background" class="flex-1 w-full" :style="{'aspect-ratio': '1/1'}" />
+			<canvas ref="color_space_background" class="flex-1 w-full aspect-square" />
 		</div>
 	</SliderBezier>
 </template>
