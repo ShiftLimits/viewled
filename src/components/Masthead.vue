@@ -158,51 +158,53 @@ import Checkbox from "./Checkbox.vue"
 
 <template>
 	<header class="lg:bg-neutral-950 flex flex-col lg:flex-row relative">
-		<!-- Device Global Functions -->
-		<div class="flex-1 flex bg-neutral-825">
-			<div class="w-4/5% xs:w-auto flex divide-x divide-neutral-850">
-				<MastheadNavButton class="flex-1 xs:flex-initial" icon="power" label="Power" @click="toggle()" :active="state.on" />
-				<MastheadNavButton class="flex-1 xs:flex-initial" @click="nightlight.toggle()" :active="state.nightlight.on" v-slot="{ active }">
-					<SvgIcon name="nightlight" class="h-1-1/4 fill-current" v-if="!active" />
-					<ProgressCircle :progress="remaining" class="h-1-1/4 stroke-current" v-else />
-					<div class="leading-2/3 w-1-3/4 flex justify-center" :class="{ 'opacity-60': !active }">Timer</div>
-				</MastheadNavButton>
-				<MastheadNavButton class="flex-1 xs:flex-initial" icon="white-balance" label="White" to="/" />
-				<MastheadNavButton class="flex-1 xs:flex-initial" icon="rgb-wheel" label="Color" to="/color" />
+		<div class="flex-1 flex flex-col sm:flex-row">
+			<!-- Device Global Functions -->
+			<div class="flex-1 flex bg-neutral-825">
+				<div class="w-4/5% xs:w-auto flex divide-x divide-neutral-850">
+					<MastheadNavButton class="flex-1 xs:flex-initial" icon="power" label="Power" @click="toggle()" :active="state.on" />
+					<MastheadNavButton class="flex-1 xs:flex-initial" @click="nightlight.toggle()" :active="state.nightlight.on" v-slot="{ active }">
+						<SvgIcon name="nightlight" class="h-1-1/4 fill-current" v-if="!active" />
+						<ProgressCircle :progress="remaining" class="h-1-1/4 stroke-current" v-else />
+						<div class="leading-2/3 w-1-3/4 flex justify-center" :class="{ 'opacity-60': !active }">Timer</div>
+					</MastheadNavButton>
+					<MastheadNavButton class="flex-1 xs:flex-initial" icon="white-balance" label="White" to="/" />
+					<MastheadNavButton class="flex-1 xs:flex-initial" icon="rgb-wheel" label="Color" to="/color" />
+				</div>
+
+				<!-- Presets -->
+				<Popover class="flex-1 flex" v-slot="{ open, close }">
+					<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b lg:border-b-0 lg:border-t border-neutral-200 z-20">
+						<div class="order-1 lg:order-3 border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 p-1/2">
+							<div class="font-black">Quick Presets</div>
+						</div>
+						<div class="order-2 h-3-1/2 flex overflow-x-auto bg-neutral-875 divide-x divide-neutral-900">
+							<template v-for="(preset, id) in presets">
+								<SubNavButton class="min-w-3-1/2 justify-center text-lg" v-if="preset.label" :key="id" :label="preset.label" :active="(state.playlistId != -1 && state.playlistId == id) || (state.playlistId == -1 && state.presetId == id)" @click="setPreset(id).then(() => close())" />
+							</template>
+						</div>
+					</PopoverPanel>
+					<PopoverButton as="div" class="flex-1 xs:flex-initial flex z-30">
+						<MastheadNavButton class="border-l border-neutral-850 w-full" :class="{ '': open }" icon="heart" label="Presets" :active="open" />
+					</PopoverButton>
+				</Popover>
 			</div>
 
-			<!-- Presets -->
-			<Popover class="flex-1 flex" v-slot="{ open, close }">
-				<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b lg:border-b-0 lg:border-t border-neutral-200 z-20">
-					<div class="order-1 lg:order-3 border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 p-1/2">
-						<div class="font-black">Quick Presets</div>
+			<!-- Brightness -->
+			<div class="flex-1 p-3/4 flex flex-col lg:max-w-12 lg:min-w-12 bg-neutral-900 bg-gradient-to-b from-neutral-950 to-neutral-900">
+				<div class="lg:flex-1"></div>
+				<div class="flex gap-1/2">
+					<div>
+						<SvgIcon name="brightness" class="w-1-3/4 h-1-3/4 fill-white" :style="{ 'opacity':  Math.max(0.1, brightness/255) }" />
 					</div>
-					<div class="order-2 h-3-1/2 flex overflow-x-auto bg-neutral-875 divide-x divide-neutral-900">
-						<template v-for="(preset, id) in presets">
-							<SubNavButton class="min-w-3-1/2 justify-center text-lg" v-if="preset.label" :key="id" :label="preset.label" :active="(state.playlistId != -1 && state.playlistId == id) || (state.playlistId == -1 && state.presetId == id)" @click="setPreset(id).then(() => close())" />
-						</template>
+					<div class="flex-1 flex flex-col justify-end gap-1/4">
+						<div class="justify-self-end flex text-xs leading-1/2">
+							<div class="text-neutral-200">Brightness</div>
+							<div class="flex-1"></div>
+							<div class="font-bold">{{ brightness }}/255</div>
+						</div>
+						<input class="h-3/4" type="range" min="0" max="255" :value="brightness" @input="handleBrightnessInput" @pointerdown="handleBrightnessPointerDown" @pointerup="handleBrightnessPointerUp" />
 					</div>
-				</PopoverPanel>
-				<PopoverButton as="div" class="flex-1 xs:flex-initial flex z-30">
-					<MastheadNavButton class="border-l border-neutral-850 w-full" :class="{ '': open }" icon="heart" label="Presets" :active="open" />
-				</PopoverButton>
-			</Popover>
-		</div>
-
-		<!-- Brightness -->
-		<div class="flex-1 p-3/4 flex flex-col lg:max-w-12 lg:min-w-12 bg-neutral-900 bg-gradient-to-b from-neutral-950 to-neutral-900">
-			<div class="lg:flex-1"></div>
-			<div class="flex gap-1/2">
-				<div>
-					<SvgIcon name="brightness" class="w-1-3/4 h-1-3/4 fill-white" :style="{ 'opacity':  Math.max(0.1, brightness/255) }" />
-				</div>
-				<div class="flex-1 flex flex-col justify-end gap-1/4">
-					<div class="justify-self-end flex text-xs leading-1/2">
-						<div class="text-neutral-200">Brightness</div>
-						<div class="flex-1"></div>
-						<div class="font-bold">{{ brightness }}/255</div>
-					</div>
-					<input class="h-3/4" type="range" min="0" max="255" :value="brightness" @input="handleBrightnessInput" @pointerdown="handleBrightnessPointerDown" @pointerup="handleBrightnessPointerUp" />
 				</div>
 			</div>
 		</div>
