@@ -1,26 +1,19 @@
+<script setup lang="ts">
+  import { computed } from 'vue'
+
+  const props = withDefaults(defineProps<{
+    prefix?:string,
+    name:string
+  }>(), {
+    prefix: 'icon',
+    name: 'info'
+  })
+
+  const symbolId = computed(() => `#${props.prefix}-${props.name}`)
+</script>
+
 <template>
-  <svg viewBox="0 0 1 1" aria-hidden="true">
+  <svg viewBox="0 0 1 1" aria-hidden="true" class="aspect-square">
     <use :xlink:href="symbolId" />
   </svg>
 </template>
-
-<script>
-  import { defineComponent, computed } from 'vue';
-
-  export default defineComponent({
-    props: {
-      prefix: {
-        type: String,
-        default: 'icon',
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-    },
-    setup(props) {
-      const symbolId = computed(() => `#${props.prefix}-${props.name}`);
-      return { symbolId };
-    },
-  });
-</script>
