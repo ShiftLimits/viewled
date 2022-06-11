@@ -1,21 +1,26 @@
 <script setup lang="ts">
-	import { computed, reactive, ref, watch } from 'vue';
+	import { computed, reactive, ref, watch, toRef } from 'vue';
 import { cctToRGB } from '../lib/color';
 	import { useColorSpaceCCTShader } from '../lib/color-picker-cct'
 	import SliderBezier from './SliderBezier.vue'
 
 	const props = withDefaults(defineProps<{
-		kelvin?:number
+		kelvin?:number,
+		min?:number,
+		max?:number
 	}>(), {
-		kelvin: 1000
+		kelvin: 1000,
+		min:1000,
+		max:12000
 	})
 
 	const emit = defineEmits(['update:kelvin'])
 
 	const color_space_background = ref<HTMLCanvasElement>()
-	useColorSpaceCCTShader(color_space_background)
+	useColorSpaceCCTShader(color_space_background, toRef(props, 'min'), toRef(props, 'max'))
 
-	const kelvin = ref(1000)
+	console.log(props.min)
+	const kelvin = ref(props.min)
 	watch(() => props.kelvin, (new_value) => {
 		kelvin.value = new_value
 	}, { immediate: true, flush: 'sync' })
@@ -24,7 +29,7 @@ import { cctToRGB } from '../lib/color';
 </script>
 
 <template>
-	<SliderBezier v-model="kelvin" :min="1000" :max="12000">
+	<SliderBezier v-model="kelvin" :min="props.min" :max="props.max">
 		<template #handle>
 			<svg viewBox="0 0 100 100" class="w-3 h-3">
 				<circle cx="50" cy="50" r="40" stroke-width="5" class="stroke-black fill-transparent" />

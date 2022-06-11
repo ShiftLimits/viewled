@@ -1,12 +1,16 @@
 import { Ref, ref, watch, onMounted, isRef, onUnmounted } from 'vue';
 import { createColorSpaceCCTShader } from './webgl';
 
-export function useColorSpaceCCTShader(canvas:Ref<HTMLCanvasElement|undefined>) {
-	const hue = ref(0)
+export function useColorSpaceCCTShader(canvas:Ref<HTMLCanvasElement|undefined>, kelvin_min:Ref<number>, kelvin_max:Ref<number>) {
 	let shader:ReturnType<typeof createColorSpaceCCTShader>
 
-	watch(hue, (new_hue) => {
-		if (shader) shader.render(new_hue / 360)
+	watch(kelvin_min, (new_value) => {
+		console.log('KMIN', new_value)
+		if (shader) shader.render(new_value, kelvin_max.value)
+	}, { immediate: true })
+	watch(kelvin_max, (new_value) => {
+		console.log('KMAX', new_value)
+		if (shader) shader.render(kelvin_min.value, new_value)
 	}, { immediate: true })
 
 	onMounted(() => {
@@ -15,7 +19,7 @@ export function useColorSpaceCCTShader(canvas:Ref<HTMLCanvasElement|undefined>) 
 
 			if (new_canvas) {
 				shader = createColorSpaceCCTShader(new_canvas)
-				shader.render(hue.value / 360)
+				shader.render(kelvin_min.value, kelvin_max.value)
 			}
 		}, { immediate: true })
 	})

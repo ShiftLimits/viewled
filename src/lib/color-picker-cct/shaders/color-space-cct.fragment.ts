@@ -10,7 +10,8 @@ ${ ColorConversionUtils }
 ${ QuadraticBezierUtils }
 out vec4 color;
 
-uniform float hue;
+uniform float kelvin_min;
+uniform float kelvin_max;
 
 void main() {
 	vec2 uv = gl_FragCoord.xy/resolution;
@@ -28,7 +29,7 @@ void main() {
 	float i = smoothstep(0.05, 0.045, distance_to_curve);
 
 	// float t = 1.0;//1.0-((1.2+b.x*2.8)/2.);
-	float kelvin = mix(1000., 12000., b.y);
+	float kelvin = mix(kelvin_min, kelvin_max, b.y);
 	color = vec4(cct2rgb(kelvin), i);
 }
 `
