@@ -5,8 +5,8 @@
 
 	const { onLiveLEDs } = useWLEDClient()
 
-	const leds = reactive<string[]>([])
-	onLiveLEDs(({ leds: new_leds }) => {
+	const leds = reactive<Uint8Array[]>([])
+	onLiveLEDs(new_leds => {
 		leds.length = 0
 		leds.push(...new_leds)
 	})

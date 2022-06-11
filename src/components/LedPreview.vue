@@ -3,7 +3,7 @@
 	import { useLEDPreviewShader } from '../lib/led-preview'
 
 	const props = withDefaults(defineProps<{
-		leds?:string[]
+		leds?:Uint8Array[]
 	}>(), {
 		leds: () => []
 	})
