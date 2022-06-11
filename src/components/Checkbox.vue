@@ -1,5 +1,5 @@
 <template>
-	<div class="cursor-pointer relative overflow-hidden rounded-3/8 w-1 h-1 bg-neutral-750 focus-within:ring-1/8 text-neutral-200">
+	<div class="cursor-pointer relative overflow-hidden rounded-3/8 w-1 h-1 bg-neutral-750 focus-within:ring-1/8 text-neutral-200 aspect-square">
 		<div v-if="value" class="p-1/4">
 			<SvgIcon name="check" class="fill-current" />
 		</div>
