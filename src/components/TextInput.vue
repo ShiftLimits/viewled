@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import { watch, withDefaults, defineProps, ref, nextTick } from 'vue'
+	import { watch, ref, nextTick } from 'vue'
 
 	const props = withDefaults(defineProps<{
 		modelValue:number|string

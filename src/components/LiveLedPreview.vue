@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import { computed, reactive, ref, watch } from 'vue'
+	import { reactive } from 'vue'
 	import { useWLEDClient } from 'vue-wled'
 	import LedPreview from './LedPreview.vue'
 
