@@ -19,7 +19,6 @@ import { cctToRGB } from '../lib/color';
 	const color_space_background = ref<HTMLCanvasElement>()
 	useColorSpaceCCTShader(color_space_background, toRef(props, 'min'), toRef(props, 'max'))
 
-	console.log(props.min)
 	const kelvin = ref(props.min)
 	watch(() => props.kelvin, (new_value) => {
 		kelvin.value = new_value
