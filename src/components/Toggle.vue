@@ -7,7 +7,7 @@
 		<div class="absolute inset-0 transition-transform duration-100 ease-in-out transform" :class="{ 'translate-x-full': value }">
 			<div class="w-1 h-1 bg-white rounded-full transition-transform duration-100 ease-in-out transform" :class="{ '-translate-x-full': value }"></div>
 		</div>
-		<input class="opacity-0 absolute inset-0 cursor-pointer outline-none" type="checkbox" v-model="value" />
+		<input class="opacity-0 absolute inset-0 w-full h-full cursor-pointer outline-none" type="checkbox" v-model="value" />
 	</div>
 </template>
 
