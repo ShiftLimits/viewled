@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<{
 			<slot v-if="$slots.default" :active="active || isActive" />
 			<template v-else>
 				<SvgIcon v-if="icon" :name="icon" class="h-1-1/4 fill-current" />
-				<div v-if="label" class="leading-2/3 flex justify-center">{{ label }}</div>
+				<div v-if="label" class="leading-2/3 flex justify-center whitespace-nowrap">{{ label }}</div>
 			</template>
 		</component>
 	</AbstractButton>
