@@ -9,7 +9,7 @@ module.exports = {
         base: {
             default: '20px',
             xs: '22px',
-            md: '24px'
+            lg: '24px'
         },
         colors: tailwindColors(require('./colors.config')),
         extend: {
