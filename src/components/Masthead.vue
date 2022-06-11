@@ -12,6 +12,7 @@
 	import { WLEDPalettesData } from "wled-client"
 	import { createGradientCSSFromState } from "../lib/wled"
 	import Checkbox from "./Checkbox.vue"
+	import Sensor from './Sensor.vue'
 
 	const { state, info, effects, palettes, presets, live, nightlight, toggle, updateState, updateSegment, setEffect, setPalette, setEffectSpeed, setEffectIntensity, toggleLEDStream, enableUDPSync, disableUDPSync, setPreset, getPalettesData } = useWLEDClient()
 
@@ -42,12 +43,24 @@
 		return _selected_palette.value == palette
 	}
 
-	let palettes_data = reactive<WLEDPalettesData>({})
-	getPalettesData().then(data => {
-		Object.assign(palettes_data, data)
-	})
+	const palettes_loading = ref(false)
+	const palettes_data = reactive<WLEDPalettesData>({})
+
+	let palettes_loaded = false
+	function loadPalettesData() {
+		if (palettes_loaded || palettes_loading.value) return
+
+		palettes_loading.value = true
+		getPalettesData().then(data => {
+			Object.assign(palettes_data, data)
+			palettes_loading.value = false
+			palettes_loaded = true
+		}).catch(e => {
+			palettes_loading.value = false
+		})
+	}
 	function getPaletteStyle(palette:string) {
-		if (!palettes_data) return ''
+		if (!palettes_loaded) return ''
 		let palette_id = palettes.indexOf(palette)
 		let stops = palettes_data[palette_id]
 		return createGradientCSSFromState(state, stops)
@@ -288,8 +301,13 @@
 					<SvgIcon name="palette" class="w-1-1/4 h-1-1/4 fill-white z-10" />
 				</ListboxButton>
 				<ListboxOptions class="absolute bottom-100% lg:bottom-0 lg:top-100% inset-x-0 lg:inset-x-auto lg:w-full lg:rounded-bl-1/2 overflow-hidden h-3/4-screen flex flex-col bg-neutral-950 border-b-1/8 lg:border-b-0 lg:border-t-1/8 border-primary-650 z-popover">
+					<Sensor @mounted="loadPalettesData" />
 					<div class="border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 px-1/2 py-3/4 font-bold">Color Palette</div>
-					<div class="overflow-auto flex-1 divide-y divide-neutral-1000">
+					<div v-if="palettes_loading" class="flex flex-col gap-1/2 items-center justify-center h-full">
+						<SvgIcon name="connection-loader" class="h-10 fill-neutral-150 stroke-neutral-150" />
+						<div>Loading Palettes</div>
+					</div>
+					<div v-else class="overflow-auto flex-1 divide-y divide-neutral-1000">
 						<ListboxOption
 							v-for="palette in sorted_palettes"
 							:key="palette"
