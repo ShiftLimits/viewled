@@ -1,4 +1,4 @@
-const { configureColors } = require('tailwindcss-color-suite')
+const { tailwindColors } = require('tailwindcss-color-suite')
 
 module.exports = {
     content: [
@@ -11,7 +11,7 @@ module.exports = {
             xs: '22px',
             md: '24px'
         },
-        colors: configureColors(),
+        colors: tailwindColors(require('./colors.config')),
         extend: {
             screens: {
                 mouse: { 'raw': '(hover: hover) and (pointer: fine)' },
