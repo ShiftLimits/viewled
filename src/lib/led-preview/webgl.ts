@@ -42,14 +42,14 @@ export function createLEDPreviewShader(canvas:HTMLCanvasElement) {
 	gl.vertexAttribPointer(texcoord_attribute_location, 2, gl.FLOAT, false, 0, 0)
 
 	return {
-		render(leds:string[]) {
+		render(leds:Uint8Array[]) {
 			const { height, width, ratio } = render(false)
 
 			setAspectRatio(ratio)
 			setTotalLEDs(leds.length)
 			setProjectionMatrix(false, ortho(-(ratio||1), (ratio||1), -1, 1, -1, 1))
 
-			const indice_colors = leds.flatMap(hexToBytes)
+			const indice_colors = leds.flatMap((led) => Array.from(led).map(component => component/255))
 			let colors_buffer = createBuffer(gl, Float32Array.from(indice_colors))
 			gl.bindBuffer(gl.ARRAY_BUFFER, colors_buffer)
 			gl.enableVertexAttribArray(color_attribute_location)

@@ -1,7 +1,7 @@
 import { Ref, ref, watch, onMounted, isRef, onUnmounted, reactive, isReactive } from 'vue';
 import { createLEDPreviewShader } from './webgl';
 
-export function useLEDPreviewShader(canvas:Ref<HTMLCanvasElement|undefined>, leds:string[]) {
+export function useLEDPreviewShader(canvas:Ref<HTMLCanvasElement|undefined>, leds:Uint8Array[]) {
 	let shader:ReturnType<typeof createLEDPreviewShader>
 
 	if (isReactive(leds)) watch(leds, (new_leds) => {
