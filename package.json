@@ -4,11 +4,11 @@
   "author": "Jeff Schofield <jeff@jeffschofield.com>",
   "license": "MIT",
   "scripts": {
-    "build": "ts-node -O \" {\\\"module\\\": \\\"commonjs\\\" }\" ./scripts/build",
+    "build": "esno ./scripts/build",
     "dev": "vite"
   },
   "gitHooks": {
-    "commit-msg": "node scripts/verifyCommit.js"
+    "commit-msg": "esno scripts/verifyCommit.ts"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.2",
@@ -26,6 +26,7 @@
     "css-class-generator": "^2.0.0",
     "cssnano": "^5.1.11",
     "cssnano-preset-default": "^5.2.11",
+    "esno": "^0.16.3",
     "fs-extra": "^10.1.0",
     "html-minifier": "^4.0.0",
     "magic-string": "^0.26.2",
@@ -36,7 +37,6 @@
     "tailwindcss-color-suite": "^0.5.1",
     "tailwindcss-gridlines": "^0.2.4",
     "tailwindcss-interaction-media": "^0.1.0",
-    "ts-node": "^10.8.1",
     "typescript": "^4.7.3",
     "vite": "^2.9.12",
     "vite-plugin-singlefile": "^0.9.0",
