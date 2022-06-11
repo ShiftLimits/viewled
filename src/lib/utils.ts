@@ -43,3 +43,25 @@ export function ortho(left:number, right:number, bottom:number, top:number, near
   out[15] = 1;
   return out;
 }
+
+export function deepEqual(x:object, y:object) {
+  const typeof_x = typeof x, typeof_y = typeof y
+
+  return (x && y && typeof_x === 'object' && typeof_x === typeof_y) ? (
+    Object.keys(x).length === Object.keys(y).length && Object.keys(x).every(key => deepEqual(x[key], y[key]))
+  ) : (x === y)
+}
+
+export function deepMerge(target:object, ...sources:object[]) {
+	for (let source of sources) {
+		for (let property in source) {
+			let value = source[property]
+			if (typeof value == 'object' && value !== null) {
+				target[property] = target[property] || {}
+				deepMerge(target[property], source[property])
+			} else {
+				target[property] = value
+			}
+		}
+	}
+}
