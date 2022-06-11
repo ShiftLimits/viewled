@@ -9,9 +9,9 @@
 	import Toggle from "./Toggle.vue"
 	import ProgressCircle from "./ProgressCircle.vue"
 	import SubNavButton from "./SubNavButton.vue"
-import { WLEDPalettesData } from "wled-client"
-import { createGradientCSSFromState } from "../lib/wled"
-import Checkbox from "./Checkbox.vue"
+	import { WLEDPalettesData } from "wled-client"
+	import { createGradientCSSFromState } from "../lib/wled"
+	import Checkbox from "./Checkbox.vue"
 
 	const { state, info, effects, palettes, presets, live, nightlight, toggle, updateState, updateSegment, setEffect, setPalette, setEffectSpeed, setEffectIntensity, toggleLEDStream, enableUDPSync, disableUDPSync, setPreset, getPalettesData } = useWLEDClient()
 
@@ -158,18 +158,16 @@ import Checkbox from "./Checkbox.vue"
 
 <template>
 	<header class="lg:bg-neutral-950 flex flex-col lg:flex-row relative">
-		<div class="flex-1 flex flex-col sm:flex-row">
+		<div class="flex-1 flex ">
 			<!-- Device Global Functions -->
 			<div class="flex-1 flex bg-neutral-825">
-				<div class="w-4/5% xs:w-auto flex divide-x divide-neutral-850">
+				<div class="w-2/5% xs:w-auto flex divide-x divide-neutral-850">
 					<MastheadNavButton class="flex-1 xs:flex-initial" icon="power" label="Power" @click="toggle()" :active="state.on" />
 					<MastheadNavButton class="flex-1 xs:flex-initial" @click="nightlight.toggle()" :active="state.nightlight.on" v-slot="{ active }">
 						<SvgIcon name="nightlight" class="h-1-1/4 fill-current" v-if="!active" />
 						<ProgressCircle :progress="remaining" class="h-1-1/4 stroke-current" v-else />
 						<div class="leading-2/3 w-1-3/4 flex justify-center" :class="{ 'opacity-60': !active }">Timer</div>
 					</MastheadNavButton>
-					<MastheadNavButton class="flex-1 xs:flex-initial" icon="white-balance" label="White" to="/" />
-					<MastheadNavButton class="flex-1 xs:flex-initial" icon="rgb-wheel" label="Color" to="/color" />
 				</div>
 
 				<!-- Presets -->
@@ -188,10 +186,15 @@ import Checkbox from "./Checkbox.vue"
 						<MastheadNavButton class="border-l border-neutral-850 w-full" :class="{ '': open }" icon="heart" label="Presets" :active="open" />
 					</PopoverButton>
 				</Popover>
+
+				<div class="w-2/5% xs:w-auto flex divide-x divide-neutral-850">
+					<MastheadNavButton class="flex-1 xs:flex-initial" icon="white-balance" label="White" to="/" />
+					<MastheadNavButton class="flex-1 xs:flex-initial" icon="rgb-wheel" label="Color" to="/color" />
+				</div>
 			</div>
 
 			<!-- Brightness -->
-			<div class="flex-1 p-3/4 flex flex-col lg:max-w-12 lg:min-w-12 bg-neutral-900 bg-gradient-to-b from-neutral-950 to-neutral-900">
+			<!-- <div class="flex-1 p-3/4 flex flex-col lg:max-w-12 lg:min-w-12 bg-neutral-900 bg-gradient-to-b from-neutral-950 to-neutral-900">
 				<div class="lg:flex-1"></div>
 				<div class="flex gap-1/2">
 					<div>
@@ -206,7 +209,8 @@ import Checkbox from "./Checkbox.vue"
 						<input class="h-3/4" type="range" min="0" max="255" :value="brightness" @input="handleBrightnessInput" @pointerdown="handleBrightnessPointerDown" @pointerup="handleBrightnessPointerUp" />
 					</div>
 				</div>
-			</div>
+			</div> -->
+
 		</div>
 
 		<!-- Bottom -->
@@ -345,13 +349,13 @@ import Checkbox from "./Checkbox.vue"
 						<SvgIcon name="segments" class="h-1 fill-current" />
 						<div class="flex-1">Segments</div>
 					</router-link>
-					<router-link @click="close" class="py-3/4 lg:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/info">
-						<SvgIcon name="info" class="h-1 fill-current" />
-						<div class="flex-1">Device Information</div>
-					</router-link>
 					<router-link @click="close" class="py-3/4 lg:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/settings">
 						<SvgIcon name="settings" class="h-1 fill-current" />
 						<div class="flex-1">Settings</div>
+					</router-link>
+					<router-link @click="close" class="py-3/4 lg:py-1/2 px-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 flex items-center space-x-3/4" to="/info">
+						<SvgIcon name="info" class="h-1 fill-current" />
+						<div class="flex-1">Device Information</div>
 					</router-link>
 					<button @click="handleSyncClick" class="border-t border-neutral-925 text-left py-3/4 lg:py-1/2 px-3/4 flex items-center space-x-3/4 mouse:hover:bg-neutral-850 bg-neutral-875 cursor-pointer">
 						<SvgIcon name="sync" class="h-1 fill-current" />
