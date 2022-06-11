@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<{
 
 <template>
 	<AbstractButton v-slot="{ isActive, href, navigate }" custom>
-		<component :is="href ? 'a': 'button'" :href="href" v-bind="$attrs" @click="navigate" class="p-3/4 xs:px-1 lg:py-1/2 lg:px-1/2 flex items-center gap-1/4" :class="{ 'text-white bg-neutral-850 mouse:hover:bg-neutral-775 active:bg-neutral-900': !active && !isActive, [activeClass]: active || isActive }">
+		<component :is="href ? 'a': 'button'" :href="href" v-bind="$attrs" @click="navigate" class="py-1/2 px-3/4 xs:px-1 lg:px-1/2 flex items-center gap-1/4" :class="{ 'text-white bg-neutral-850 mouse:hover:bg-neutral-775 active:bg-neutral-900': !active && !isActive, [activeClass]: active || isActive }">
 			<slot v-if="$slots.default" :active="active || isActive" />
 			<template v-else>
 				<SvgIcon v-if="icon" :name="icon" class="h-1-1/4 fill-current" />
