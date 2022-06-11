@@ -8,7 +8,7 @@
     "sourceMap": true,
     "lib": ["esnext", "dom"],
     "types": ["@types/node", "vite/client", "@types/resize-observer-browser"],
-    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
+    "plugins": [],
     "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
