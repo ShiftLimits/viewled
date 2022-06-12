@@ -196,7 +196,7 @@
 						</div>
 					</PopoverPanel>
 					<PopoverButton as="div" class="flex-1 xs:flex-initial flex z-30">
-						<MastheadNavButton class="border-l border-neutral-850 w-full" :class="{ '': open }" icon="heart" label="Presets" :active="open" />
+						<MastheadNavButton class="border-x border-neutral-850 w-full" :class="{ '': open }" icon="heart" label="Presets" :active="open" />
 					</PopoverButton>
 				</Popover>
 
