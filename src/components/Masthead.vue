@@ -174,7 +174,7 @@
 		<div class="flex-1 flex ">
 			<!-- Device Global Functions -->
 			<div class="flex-1 flex bg-neutral-825">
-				<div class="w-2/5% xs:w-auto flex divide-x divide-neutral-850">
+				<div class="order-1 lg:order-2 w-2/5% xs:w-auto flex divide-x divide-neutral-850">
 					<MastheadNavButton class="flex-1 xs:flex-initial" icon="power" label="Power" @click="toggle()" :active="state.on" />
 					<MastheadNavButton class="flex-1 xs:flex-initial" @click="nightlight.toggle()" :active="state.nightlight.on" v-slot="{ active }">
 						<SvgIcon name="nightlight" class="h-1-1/4 fill-current" v-if="!active" />
@@ -184,7 +184,7 @@
 				</div>
 
 				<!-- Presets -->
-				<Popover class="flex-1 flex" v-slot="{ open, close }">
+				<Popover class="order-2 lg:order-3 flex-1 lg:flex-initial flex" v-slot="{ open, close }">
 					<PopoverPanel class="absolute right-0 bottom-100% lg:top-100% lg:bottom-auto w-full flex flex-col shadow-md border-b lg:border-b-0 lg:border-t border-neutral-200 z-popover">
 						<div class="order-1 lg:order-3 border-b border-neutral-900 bg-gradient-to-b from-neutral-775 to-neutral-825 p-1/2">
 							<div class="font-black">Quick Presets</div>
@@ -200,10 +200,12 @@
 					</PopoverButton>
 				</Popover>
 
-				<div class="w-2/5% xs:w-auto flex divide-x divide-neutral-850">
+				<div class="order-3 lg:order-1 w-2/5% xs:w-auto flex divide-x divide-neutral-850">
 					<MastheadNavButton class="flex-1 xs:flex-initial" icon="white-balance" label="White" to="/" />
 					<MastheadNavButton class="flex-1 xs:flex-initial" icon="rgb-wheel" label="Color" to="/color" />
 				</div>
+
+				<div class="lg:order-1 lg:flex-1"></div>
 			</div>
 
 			<!-- Brightness -->
