@@ -2,6 +2,7 @@
 	import { useWLEDClient } from 'vue-wled'
 	import Masthead from '../components/Masthead.vue'
 	import SvgIcon from '../components/SvgIcon.vue'
+	import DeviceConnectionStatus from "../components/DeviceConnectionStatus.vue"
 	import LiveLedPreview from '../components/LiveLedPreview.vue'
 
 	const { connecting, info, live } = useWLEDClient()
@@ -13,6 +14,12 @@
 		<div class="text-4xl font-black">Connecting...</div>
 	</div>
 	<template v-else>
+		<div class="border-b border-neutral-1000 bg-gradient-to-b from-neutral-925 to-neutral-900 flex items-stretch">
+			<div class="bg-neutral-875 flex items-center justify-center aspect-square h-full">
+				<DeviceConnectionStatus />
+			</div>
+			<div class="flex items-center px-1/2 py-1/4 text-xs text-neutral-500">{{info.name}}</div>
+		</div>
 		<div v-if="live.leds" class="order-4 lg:order-3 h-1-1/2 bg-gradient-to-b from-neutral-900 to-neutral-925 relative flex items-center justify-center z-peek">
 			<LiveLedPreview class="absolute w-[300%] h-[300%] pointer-events-none" />
 		</div>
