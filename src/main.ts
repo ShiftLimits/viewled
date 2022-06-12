@@ -30,6 +30,8 @@ export function createApp(options:AppOptions = {}) {
 	})
 	app.use(wledClientPlugin(wled_client))
 
+	if (!import.meta.env.SSR) window.wled = wled_client
+
 	// App Services
 
 	// Components
