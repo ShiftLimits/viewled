@@ -27,6 +27,7 @@ specifiers:
   mime-types: ^2.1.35
   postcss: ^8.4.14
   postcss-modules: ^4.3.1
+  slgl: ^0.0.5
   tailwindcss: ^3.1.2
   tailwindcss-color-suite: ^0.5.1
   tailwindcss-gridlines: ^0.2.4
@@ -46,6 +47,7 @@ dependencies:
   '@vue/server-renderer': 3.2.37_vue@3.2.37
   express: 4.18.1
   lodash: 4.17.21
+  slgl: 0.0.5
   vue: 3.2.37
   vue-router: 4.0.16_vue@3.2.37
   vue-wled: 0.3.0
@@ -3423,6 +3425,10 @@ packages:
     dependencies:
       is-arrayish: 0.3.2
     dev: true
+
+  /slgl/0.0.5:
+    resolution: {integrity: sha512-sPFk/o6Lz3d10pBN0dZuSFy3Tyo8mJPcCru47dHd1FPlHs/fUnS2sq0T0R3th75pKEysydJVftGEAM2VhVJKcg==}
+    dev: false
 
   /snapdragon-node/2.1.1:
     resolution: {integrity: sha512-O27l4xaMYt/RSQ5TR3vpWCAB5Kb/czIcqUFOM/C4fYcLnbZUc1PkjTAMjof2pBWaSTwOUd6qUHcFGVGj7aIwnw==}

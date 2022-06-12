@@ -1,8 +1,8 @@
-import { createFragmentProgram } from '../webgl'
+import { createFragmentShaderCanvas } from 'slgl'
 import ColorSpaceCCTFragmentSource from './shaders/color-space-cct.fragment'
 
 export function createColorSpaceCCTShader(canvas:HTMLCanvasElement) {
-	const { createUniform, render, destroy } = createFragmentProgram(canvas, ColorSpaceCCTFragmentSource)
+	const { createUniform, render, destroy } = createFragmentShaderCanvas(canvas, ColorSpaceCCTFragmentSource)
 
 	const setKelvinMin = createUniform('1f', 'kelvin_min')
 	const setKelvinMax = createUniform('1f', 'kelvin_max')

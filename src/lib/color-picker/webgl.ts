@@ -1,10 +1,10 @@
-import { createFragmentProgram } from '../webgl'
+import { createFragmentShaderCanvas } from 'slgl'
 import ColorSpaceFragmentSource from './shaders/color-space.fragment'
 import HueFragmentSource from './shaders/hue.fragment'
 import AlphaFragmentSource from './shaders/alpha.fragment'
 
 export function createColorSpaceShader(canvas:HTMLCanvasElement) {
-	const { createUniform, render, destroy } = createFragmentProgram(canvas, ColorSpaceFragmentSource)
+	const { createUniform, render, destroy } = createFragmentShaderCanvas(canvas, ColorSpaceFragmentSource)
 
 	const setHue = createUniform('1f', 'hue')
 
@@ -18,7 +18,7 @@ export function createColorSpaceShader(canvas:HTMLCanvasElement) {
 }
 
 export function createHueWheelShader(canvas:HTMLCanvasElement) {
-	const { createUniform, render, destroy } = createFragmentProgram(canvas, HueFragmentSource)
+	const { createUniform, render, destroy } = createFragmentShaderCanvas(canvas, HueFragmentSource)
 
 	const setSaturation = createUniform('1f', 'saturation')
 	const setValue = createUniform('1f', 'value')
@@ -34,7 +34,7 @@ export function createHueWheelShader(canvas:HTMLCanvasElement) {
 }
 
 export function createAlphaWheelShader(canvas:HTMLCanvasElement) {
-	const { createUniform, render, destroy } = createFragmentProgram(canvas, AlphaFragmentSource)
+	const { createUniform, render, destroy } = createFragmentShaderCanvas(canvas, AlphaFragmentSource)
 
 	const setHue = createUniform('1f', 'hue')
 	const setSaturation = createUniform('1f', 'saturation')
