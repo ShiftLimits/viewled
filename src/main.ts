@@ -26,7 +26,10 @@ export function createApp(options:AppOptions = {}) {
 	let host = isServer ? '' : window.location.hostname
 	const wled_client = new WLEDClient({
 		host: import.meta.env.PROD ? host : import.meta.env.WLED_DEVICE_HOST,
-		immediate: !isServer
+		immediate: !isServer,
+		init: {
+			config: false
+		}
 	})
 	app.use(wledClientPlugin(wled_client))
 
