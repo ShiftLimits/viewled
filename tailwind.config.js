@@ -125,6 +125,7 @@ module.exports = {
         },
     },
     plugins: [
+        require('tailwindcss-interaction-media'),
         require('tailwindcss-gridlines'),
         require('@tailwindcss/typography')
     ],
