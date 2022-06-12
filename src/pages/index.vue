@@ -5,9 +5,10 @@
 	import throttle from 'lodash/throttle'
 	import ColorPickerCCT from "../components/ColorPickerCCT.vue"
 
-	const { state, setColor, setCCT } = useWLEDClient()
+	const { state, setColor, setCCT, updateState } = useWLEDClient()
 	const throttleSetColor = throttle((color) => setColor(color, { transition: 1 }), 100)
 	const throttleSetCCT = throttle((color) => setCCT(color, { transition: 1 }), 100)
+	const throttleUpdateState = throttle((state) => updateState(state, { transition: 1 }), 100)
 	const kelvin_min = parseInt(import.meta.env.WLED_KELVIN_MIN || 1000)
 	const kelvin_max = parseInt(import.meta.env.WLED_KELVIN_MAX || 12000)
 
@@ -26,8 +27,14 @@
 		},
 		set: (kelvin:number) => {
 			_kelvin.value = kelvin
-			throttleSetColor([0,0,0,255])
-			throttleSetCCT(Math.round(((kelvin-kelvin_min) / (kelvin_max - kelvin_min)) * 255))
+			throttleUpdateState({
+				segments: [
+					{
+						colors: [[0,0,0,255]],
+						cct: Math.round(((kelvin-kelvin_min) / (kelvin_max - kelvin_min)) * 255)
+					}
+				]
+			})
 		}
 	})
 
