@@ -90,6 +90,7 @@ module.exports = {
                         },
                         h2: {
                             color: theme('colors.neutral.100'),
+                            lineHeight: "calc(var(--twgl-base) * 1.0)",
                             marginTop: "var(--twgl-base)",
                             marginBottom: "var(--twgl-base)"
                         },
