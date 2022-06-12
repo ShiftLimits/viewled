@@ -50,7 +50,7 @@
     "lodash": "^4.17.21",
     "vue": "^3.2.37",
     "vue-router": "^4.0.16",
-    "vue-wled": "^0.2.0",
-    "wled-client": "0.21.0"
+    "vue-wled": "^0.3.0",
+    "wled-client": "^0.22.0"
   }
 }
