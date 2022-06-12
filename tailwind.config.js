@@ -31,7 +31,8 @@ module.exports = {
                 'behind': -1,
                 'masthead': 50000,
                 'peek': 60000,
-                'popover': 100000
+                'popover': 100000,
+                'modal': 150000
             },
             spacing: {
                 px: '1px'
