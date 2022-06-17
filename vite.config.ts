@@ -40,7 +40,10 @@ export default defineConfig({
               }
             }
 
-            return code
+            return {
+              code: src.toString(),
+              map: sourcemap === false ? null : src.generateMap({ hires: true })
+            }
           }
         }
       ]
